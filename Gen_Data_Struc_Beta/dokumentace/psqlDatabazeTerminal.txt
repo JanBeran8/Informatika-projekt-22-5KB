@@ -1,0 +1,34 @@
+POSTGRES terminal:
+
+
+
+Zobrazeni SQL prikazu pro vse co si zavolame
+\set ECHO_HIDDEN on
+
+
+
+PRIPOJENI na databzi:
+psql JMENODATABAZE USER
+např   psql postgres postgres
+
+UKONCENI spojeni:
+\q
+
+list vsech tabulek v databazi:
+\d
+
+tabulka typu dane tabulky:
+\d JMENO_TABULKY
+např  \d users
+
+Zobrazeni dostupnych prikazu psql help
+\?
+
+Zobrazeni databazí:
+\l
+
+KOD z fora copy:
+SELECT table_name FROM information_schema.tables WHERE table_type = 'BASE TABLE' AND table_schema NOT IN ('pg_catalog', 'information_schema');SELECT column_name FROM information_schema.columns WHERE table_name = 'YourTablesName';
+
+dostupne prikazy help SQL commands
+\h

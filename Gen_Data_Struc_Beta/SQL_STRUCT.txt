@@ -1,0 +1,21 @@
+CREATE SCHEMA public
+	CREATE TABLE public.users(
+		id bigint,
+		name character varying
+	)
+	CREATE TABLE public.usergroups(
+		id bigint,
+		user_id bigint,
+		group_id bigint
+	)
+	CREATE TABLE public.groups(
+		id bigint,
+		name character varying
+	)
+	CREATE TABLE public.uzivatel(
+		uzivatele_id integer,
+		jmeno character varying,
+		prijmeni character varying,
+		datum_narozeni date,
+		pocet_clanku integer
+	)
