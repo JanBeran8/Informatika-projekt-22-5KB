@@ -1,0 +1,146 @@
+class public.actor(BaseModel):
+	__tablename__ = 'actor' 
+
+	actor_id = Column(integer, primary_key=True)
+	first_name = Column(character varying)
+	last_name = Column(character varying)
+	last_update = Column(timestamp without time zone)
+
+class public.store(BaseModel):
+	__tablename__ = 'store' 
+
+	store_id = Column(integer, primary_key=True)
+	manager_staff_id = Column(smallint, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	address_id = Column(smallint, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	last_update = Column(timestamp without time zone)
+
+class public.address(BaseModel):
+	__tablename__ = 'address' 
+
+	address_id = Column(integer, primary_key=True)
+	address = Column(character varying)
+	address2 = Column(character varying)
+	district = Column(character varying)
+	city_id = Column(smallint, ForeignKey(__TEST__, onupdate = 'NO ACTION', ondelete = 'NO ACTION'))
+	postal_code = Column(character varying)
+	phone = Column(character varying)
+	last_update = Column(timestamp without time zone)
+
+class public.category(BaseModel):
+	__tablename__ = 'category' 
+
+	category_id = Column(integer, primary_key=True)
+	name = Column(character varying)
+	last_update = Column(timestamp without time zone)
+
+class public.city(BaseModel):
+	__tablename__ = 'city' 
+
+	city_id = Column(integer, primary_key=True)
+	city = Column(character varying)
+	country_id = Column(smallint, ForeignKey(__TEST__, onupdate = 'NO ACTION', ondelete = 'NO ACTION'))
+	last_update = Column(timestamp without time zone)
+
+class public.country(BaseModel):
+	__tablename__ = 'country' 
+
+	country_id = Column(integer, primary_key=True)
+	country = Column(character varying)
+	last_update = Column(timestamp without time zone)
+
+class public.customer(BaseModel):
+	__tablename__ = 'customer' 
+
+	customer_id = Column(integer, primary_key=True)
+	store_id = Column(smallint)
+	first_name = Column(character varying)
+	last_name = Column(character varying)
+	email = Column(character varying)
+	address_id = Column(smallint, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	activebool = Column(boolean)
+	create_date = Column(date)
+	last_update = Column(timestamp without time zone)
+	active = Column(integer)
+
+class public.film_actor(BaseModel):
+	__tablename__ = 'film_actor' 
+
+	actor_id = Column(smallint, primary_key=True, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	film_id = Column(smallint, primary_key=True, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	last_update = Column(timestamp without time zone)
+
+class public.film_category(BaseModel):
+	__tablename__ = 'film_category' 
+
+	film_id = Column(smallint, primary_key=True, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	category_id = Column(smallint, primary_key=True, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	last_update = Column(timestamp without time zone)
+
+class public.inventory(BaseModel):
+	__tablename__ = 'inventory' 
+
+	inventory_id = Column(integer, primary_key=True)
+	film_id = Column(smallint, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	store_id = Column(smallint)
+	last_update = Column(timestamp without time zone)
+
+class public.language(BaseModel):
+	__tablename__ = 'language' 
+
+	language_id = Column(integer, primary_key=True)
+	name = Column(character)
+	last_update = Column(timestamp without time zone)
+
+class public.rental(BaseModel):
+	__tablename__ = 'rental' 
+
+	rental_id = Column(integer, primary_key=True)
+	rental_date = Column(timestamp without time zone)
+	inventory_id = Column(integer, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	customer_id = Column(smallint, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	return_date = Column(timestamp without time zone)
+	staff_id = Column(smallint, ForeignKey(__TEST__, onupdate = 'NO ACTION', ondelete = 'NO ACTION'))
+	last_update = Column(timestamp without time zone)
+
+class public.staff(BaseModel):
+	__tablename__ = 'staff' 
+
+	staff_id = Column(integer, primary_key=True)
+	first_name = Column(character varying)
+	last_name = Column(character varying)
+	address_id = Column(smallint, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	email = Column(character varying)
+	store_id = Column(smallint)
+	active = Column(boolean)
+	username = Column(character varying)
+	password = Column(character varying)
+	last_update = Column(timestamp without time zone)
+	picture = Column(bytea)
+
+class public.payment(BaseModel):
+	__tablename__ = 'payment' 
+
+	payment_id = Column(integer, primary_key=True)
+	customer_id = Column(smallint, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	staff_id = Column(smallint, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	rental_id = Column(integer, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'SET NULL'))
+	amount = Column(numeric)
+	payment_date = Column(timestamp without time zone)
+
+class public.film(BaseModel):
+	__tablename__ = 'film' 
+
+	film_id = Column(integer, primary_key=True)
+	title = Column(character varying)
+	description = Column(text)
+	release_year = Column(integer)
+	language_id = Column(smallint, ForeignKey(__TEST__, onupdate = 'CASCADE', ondelete = 'RESTRICT'))
+	rental_duration = Column(smallint)
+	rental_rate = Column(numeric)
+	length = Column(smallint)
+	replacement_cost = Column(numeric)
+	rating = Column(USER-DEFINED)
+	last_update = Column(timestamp without time zone)
+	special_features = Column(ARRAY)
+	fulltext = Column(tsvector)
+
