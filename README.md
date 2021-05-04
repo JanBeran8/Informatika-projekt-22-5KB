@@ -13,4 +13,6 @@ téma č. 2 - Realizujte API generátor pomocí knihovny FastAPI s autentizací 
                                   - Delete
                                   - Read_Multiple
                                   - Read
+
+4) Schemas vygenerovat zvlášť to texťáku
                                  
