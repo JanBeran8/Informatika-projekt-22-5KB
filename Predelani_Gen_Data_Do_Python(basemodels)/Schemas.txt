@@ -1,0 +1,558 @@
+from typing import List, Optional
+from pydantic import BaseModel as BaseSchema       #ZDE BY NEBYLO NUTNE ?? je to jiny soubor proto muzem pouzit BaseModel ????
+
+
+class actorCreateSchema(BaseSchema):
+	actor_id: int
+	first_name: str
+	last_name: str
+	last_update: DateTime
+
+class actorGetSchema(BaseSchema):
+	actor_id: int
+	first_name: str
+	last_name: str
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class actorUpdateSchema(BaseSchema):
+	actor_id: int
+	first_name: str
+	last_name: str
+	last_update: DateTime
+
+class actorDeleteSchema(BaseSchema):
+	actor_id: int
+	first_name: str
+	last_name: str
+	last_update: DateTime
+
+
+
+
+class storeCreateSchema(BaseSchema):
+	store_id: int
+	manager_staff_id: int
+	address_id: int
+	last_update: DateTime
+
+class storeGetSchema(BaseSchema):
+	store_id: int
+	manager_staff_id: int
+	address_id: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class storeUpdateSchema(BaseSchema):
+	store_id: int
+	manager_staff_id: int
+	address_id: int
+	last_update: DateTime
+
+class storeDeleteSchema(BaseSchema):
+	store_id: int
+	manager_staff_id: int
+	address_id: int
+	last_update: DateTime
+
+
+
+
+class addressCreateSchema(BaseSchema):
+	address_id: int
+	address: str
+	address2: str
+	district: str
+	city_id: int
+	postal_code: str
+	phone: str
+	last_update: DateTime
+
+class addressGetSchema(BaseSchema):
+	address_id: int
+	address: str
+	address2: str
+	district: str
+	city_id: int
+	postal_code: str
+	phone: str
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class addressUpdateSchema(BaseSchema):
+	address_id: int
+	address: str
+	address2: str
+	district: str
+	city_id: int
+	postal_code: str
+	phone: str
+	last_update: DateTime
+
+class addressDeleteSchema(BaseSchema):
+	address_id: int
+	address: str
+	address2: str
+	district: str
+	city_id: int
+	postal_code: str
+	phone: str
+	last_update: DateTime
+
+
+
+
+class categoryCreateSchema(BaseSchema):
+	category_id: int
+	name: str
+	last_update: DateTime
+
+class categoryGetSchema(BaseSchema):
+	category_id: int
+	name: str
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class categoryUpdateSchema(BaseSchema):
+	category_id: int
+	name: str
+	last_update: DateTime
+
+class categoryDeleteSchema(BaseSchema):
+	category_id: int
+	name: str
+	last_update: DateTime
+
+
+
+
+class cityCreateSchema(BaseSchema):
+	city_id: int
+	city: str
+	country_id: int
+	last_update: DateTime
+
+class cityGetSchema(BaseSchema):
+	city_id: int
+	city: str
+	country_id: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class cityUpdateSchema(BaseSchema):
+	city_id: int
+	city: str
+	country_id: int
+	last_update: DateTime
+
+class cityDeleteSchema(BaseSchema):
+	city_id: int
+	city: str
+	country_id: int
+	last_update: DateTime
+
+
+
+
+class countryCreateSchema(BaseSchema):
+	country_id: int
+	country: str
+	last_update: DateTime
+
+class countryGetSchema(BaseSchema):
+	country_id: int
+	country: str
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class countryUpdateSchema(BaseSchema):
+	country_id: int
+	country: str
+	last_update: DateTime
+
+class countryDeleteSchema(BaseSchema):
+	country_id: int
+	country: str
+	last_update: DateTime
+
+
+
+
+class customerCreateSchema(BaseSchema):
+	customer_id: int
+	store_id: int
+	first_name: str
+	last_name: str
+	email: str
+	address_id: int
+	activebool: int
+	create_date: int
+	last_update: DateTime
+	active: int
+
+class customerGetSchema(BaseSchema):
+	customer_id: int
+	store_id: int
+	first_name: str
+	last_name: str
+	email: str
+	address_id: int
+	activebool: int
+	create_date: int
+	last_update: DateTime
+	active: int
+	class Config:
+		orm_mode = True
+	pass
+
+class customerUpdateSchema(BaseSchema):
+	customer_id: int
+	store_id: int
+	first_name: str
+	last_name: str
+	email: str
+	address_id: int
+	activebool: int
+	create_date: int
+	last_update: DateTime
+	active: int
+
+class customerDeleteSchema(BaseSchema):
+	customer_id: int
+	store_id: int
+	first_name: str
+	last_name: str
+	email: str
+	address_id: int
+	activebool: int
+	create_date: int
+	last_update: DateTime
+	active: int
+
+
+
+
+class film_actorCreateSchema(BaseSchema):
+	actor_id: int
+	film_id: int
+	last_update: DateTime
+
+class film_actorGetSchema(BaseSchema):
+	actor_id: int
+	film_id: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class film_actorUpdateSchema(BaseSchema):
+	actor_id: int
+	film_id: int
+	last_update: DateTime
+
+class film_actorDeleteSchema(BaseSchema):
+	actor_id: int
+	film_id: int
+	last_update: DateTime
+
+
+
+
+class film_categoryCreateSchema(BaseSchema):
+	film_id: int
+	category_id: int
+	last_update: DateTime
+
+class film_categoryGetSchema(BaseSchema):
+	film_id: int
+	category_id: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class film_categoryUpdateSchema(BaseSchema):
+	film_id: int
+	category_id: int
+	last_update: DateTime
+
+class film_categoryDeleteSchema(BaseSchema):
+	film_id: int
+	category_id: int
+	last_update: DateTime
+
+
+
+
+class inventoryCreateSchema(BaseSchema):
+	inventory_id: int
+	film_id: int
+	store_id: int
+	last_update: DateTime
+
+class inventoryGetSchema(BaseSchema):
+	inventory_id: int
+	film_id: int
+	store_id: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class inventoryUpdateSchema(BaseSchema):
+	inventory_id: int
+	film_id: int
+	store_id: int
+	last_update: DateTime
+
+class inventoryDeleteSchema(BaseSchema):
+	inventory_id: int
+	film_id: int
+	store_id: int
+	last_update: DateTime
+
+
+
+
+class languageCreateSchema(BaseSchema):
+	language_id: int
+	name: int
+	last_update: DateTime
+
+class languageGetSchema(BaseSchema):
+	language_id: int
+	name: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class languageUpdateSchema(BaseSchema):
+	language_id: int
+	name: int
+	last_update: DateTime
+
+class languageDeleteSchema(BaseSchema):
+	language_id: int
+	name: int
+	last_update: DateTime
+
+
+
+
+class rentalCreateSchema(BaseSchema):
+	rental_id: int
+	rental_date: DateTime
+	inventory_id: int
+	customer_id: int
+	return_date: DateTime
+	staff_id: int
+	last_update: DateTime
+
+class rentalGetSchema(BaseSchema):
+	rental_id: int
+	rental_date: DateTime
+	inventory_id: int
+	customer_id: int
+	return_date: DateTime
+	staff_id: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class rentalUpdateSchema(BaseSchema):
+	rental_id: int
+	rental_date: DateTime
+	inventory_id: int
+	customer_id: int
+	return_date: DateTime
+	staff_id: int
+	last_update: DateTime
+
+class rentalDeleteSchema(BaseSchema):
+	rental_id: int
+	rental_date: DateTime
+	inventory_id: int
+	customer_id: int
+	return_date: DateTime
+	staff_id: int
+	last_update: DateTime
+
+
+
+
+class staffCreateSchema(BaseSchema):
+	staff_id: int
+	first_name: str
+	last_name: str
+	address_id: int
+	email: str
+	store_id: int
+	active: int
+	username: str
+	password: str
+	last_update: DateTime
+	picture: int
+
+class staffGetSchema(BaseSchema):
+	staff_id: int
+	first_name: str
+	last_name: str
+	address_id: int
+	email: str
+	store_id: int
+	active: int
+	username: str
+	password: str
+	last_update: DateTime
+	picture: int
+	class Config:
+		orm_mode = True
+	pass
+
+class staffUpdateSchema(BaseSchema):
+	staff_id: int
+	first_name: str
+	last_name: str
+	address_id: int
+	email: str
+	store_id: int
+	active: int
+	username: str
+	password: str
+	last_update: DateTime
+	picture: int
+
+class staffDeleteSchema(BaseSchema):
+	staff_id: int
+	first_name: str
+	last_name: str
+	address_id: int
+	email: str
+	store_id: int
+	active: int
+	username: str
+	password: str
+	last_update: DateTime
+	picture: int
+
+
+
+
+class paymentCreateSchema(BaseSchema):
+	payment_id: int
+	customer_id: int
+	staff_id: int
+	rental_id: int
+	amount: int
+	payment_date: DateTime
+
+class paymentGetSchema(BaseSchema):
+	payment_id: int
+	customer_id: int
+	staff_id: int
+	rental_id: int
+	amount: int
+	payment_date: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class paymentUpdateSchema(BaseSchema):
+	payment_id: int
+	customer_id: int
+	staff_id: int
+	rental_id: int
+	amount: int
+	payment_date: DateTime
+
+class paymentDeleteSchema(BaseSchema):
+	payment_id: int
+	customer_id: int
+	staff_id: int
+	rental_id: int
+	amount: int
+	payment_date: DateTime
+
+
+
+
+class filmCreateSchema(BaseSchema):
+	film_id: int
+	title: str
+	description: int
+	release_year: int
+	language_id: int
+	rental_duration: int
+	rental_rate: int
+	length: int
+	replacement_cost: int
+	rating: int
+	last_update: DateTime
+	special_features: int
+	fulltext: int
+
+class filmGetSchema(BaseSchema):
+	film_id: int
+	title: str
+	description: int
+	release_year: int
+	language_id: int
+	rental_duration: int
+	rental_rate: int
+	length: int
+	replacement_cost: int
+	rating: int
+	last_update: DateTime
+	special_features: int
+	fulltext: int
+	class Config:
+		orm_mode = True
+	pass
+
+class filmUpdateSchema(BaseSchema):
+	film_id: int
+	title: str
+	description: int
+	release_year: int
+	language_id: int
+	rental_duration: int
+	rental_rate: int
+	length: int
+	replacement_cost: int
+	rating: int
+	last_update: DateTime
+	special_features: int
+	fulltext: int
+
+class filmDeleteSchema(BaseSchema):
+	film_id: int
+	title: str
+	description: int
+	release_year: int
+	language_id: int
+	rental_duration: int
+	rental_rate: int
+	length: int
+	replacement_cost: int
+	rating: int
+	last_update: DateTime
+	special_features: int
+	fulltext: int
+
+
+
+
