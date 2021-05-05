@@ -16,3 +16,7 @@ téma č. 2 - Realizujte API generátor pomocí knihovny FastAPI s autentizací 
 
 4) Schemas vygenerovat zvlášť to texťáku
                                  
+5) #DODELAT:                                #           X    INDEX??,
+                                            #           X    zkontrolovat zda vygenerované TYPY fungují v Pythonu, kdyžtak je nahradit !!!
+                                            #           X    DEDICNOST schemat????
+                                            #           X    RELATIONSHIPS u modelu ???
