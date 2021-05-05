@@ -1,146 +1,36 @@
-class public.actor(BaseModel):
-	__tablename__ = 'actor' 
+class public.users(BaseModel):
+	__tablename__ = 'users' 
 
-	actor_id = Column(Integer, Sequence('actor_actor_id_seq'), primary_key=True)
-	first_name = Column(String(45))
-	last_name = Column(String(45))
-	last_update = Column(DateTime)
+	id = Column(Integer, primary_key=True)
+	name = Column(String)
 
-class public.store(BaseModel):
-	__tablename__ = 'store' 
+	***RELATIONSHIPS***
 
-	store_id = Column(Integer, Sequence('store_store_id_seq'), primary_key=True)
-	manager_staff_id = Column(Integer, ForeignKey('staff.staff_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	address_id = Column(Integer, ForeignKey('address.address_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	last_update = Column(DateTime)
+class public.usergroups(BaseModel):
+	__tablename__ = 'usergroups' 
 
-class public.address(BaseModel):
-	__tablename__ = 'address' 
+	id = Column(Integer, primary_key=True)
+	user_id = Column(Integer, ForeignKey('users.id', onupdate = "NO ACTION", ondelete = "NO ACTION"))
+	group_id = Column(Integer, ForeignKey('groups.id', onupdate = "NO ACTION", ondelete = "NO ACTION"))
 
-	address_id = Column(Integer, Sequence('address_address_id_seq'), primary_key=True)
-	address = Column(String(50))
-	address2 = Column(String(50))
-	district = Column(String(20))
-	city_id = Column(Integer, ForeignKey('city.city_id', onupdate = "NO ACTION", ondelete = "NO ACTION"))
-	postal_code = Column(String(10))
-	phone = Column(String(20))
-	last_update = Column(DateTime)
+	***RELATIONSHIPS***
 
-class public.category(BaseModel):
-	__tablename__ = 'category' 
+class public.groups(BaseModel):
+	__tablename__ = 'groups' 
 
-	category_id = Column(Integer, Sequence('category_category_id_seq'), primary_key=True)
-	name = Column(String(25))
-	last_update = Column(DateTime)
+	id = Column(Integer, primary_key=True)
+	name = Column(String)
 
-class public.city(BaseModel):
-	__tablename__ = 'city' 
+	***RELATIONSHIPS***
 
-	city_id = Column(Integer, Sequence('city_city_id_seq'), primary_key=True)
-	city = Column(String(50))
-	country_id = Column(Integer, ForeignKey('country.country_id', onupdate = "NO ACTION", ondelete = "NO ACTION"))
-	last_update = Column(DateTime)
+class public.uzivatel(BaseModel):
+	__tablename__ = 'uzivatel' 
 
-class public.country(BaseModel):
-	__tablename__ = 'country' 
+	uzivatele_id = Column(Integer, Sequence('uzivatel_uzivatele_id_seq'), primary_key=True)
+	jmeno = Column(String(60))
+	prijmeni = Column(String(60))
+	datum_narozeni = Column(Integer)
+	pocet_clanku = Column(Integer)
 
-	country_id = Column(Integer, Sequence('country_country_id_seq'), primary_key=True)
-	country = Column(String(50))
-	last_update = Column(DateTime)
-
-class public.customer(BaseModel):
-	__tablename__ = 'customer' 
-
-	customer_id = Column(Integer, Sequence('customer_customer_id_seq'), primary_key=True)
-	store_id = Column(Integer)
-	first_name = Column(String(45))
-	last_name = Column(String(45))
-	email = Column(String(50))
-	address_id = Column(Integer, ForeignKey('address.address_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	activebool = Column(Integer)
-	create_date = Column(Integer, Sequence('now'))
-	last_update = Column(DateTime)
-	active = Column(Integer)
-
-class public.film_actor(BaseModel):
-	__tablename__ = 'film_actor' 
-
-	actor_id = Column(Integer, primary_key=True, ForeignKey('actor.actor_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	film_id = Column(Integer, primary_key=True, ForeignKey('film.film_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	last_update = Column(DateTime)
-
-class public.film_category(BaseModel):
-	__tablename__ = 'film_category' 
-
-	film_id = Column(Integer, primary_key=True, ForeignKey('film.film_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	category_id = Column(Integer, primary_key=True, ForeignKey('category.category_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	last_update = Column(DateTime)
-
-class public.inventory(BaseModel):
-	__tablename__ = 'inventory' 
-
-	inventory_id = Column(Integer, Sequence('inventory_inventory_id_seq'), primary_key=True)
-	film_id = Column(Integer, ForeignKey('film.film_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	store_id = Column(Integer)
-	last_update = Column(DateTime)
-
-class public.language(BaseModel):
-	__tablename__ = 'language' 
-
-	language_id = Column(Integer, Sequence('language_language_id_seq'), primary_key=True)
-	name = Column(Integer)
-	last_update = Column(DateTime)
-
-class public.rental(BaseModel):
-	__tablename__ = 'rental' 
-
-	rental_id = Column(Integer, Sequence('rental_rental_id_seq'), primary_key=True)
-	rental_date = Column(DateTime)
-	inventory_id = Column(Integer, ForeignKey('inventory.inventory_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	customer_id = Column(Integer, ForeignKey('customer.customer_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	return_date = Column(DateTime)
-	staff_id = Column(Integer, ForeignKey('staff.staff_id', onupdate = "NO ACTION", ondelete = "NO ACTION"))
-	last_update = Column(DateTime)
-
-class public.staff(BaseModel):
-	__tablename__ = 'staff' 
-
-	staff_id = Column(Integer, Sequence('staff_staff_id_seq'), primary_key=True)
-	first_name = Column(String(45))
-	last_name = Column(String(45))
-	address_id = Column(Integer, ForeignKey('address.address_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	email = Column(String(50))
-	store_id = Column(Integer)
-	active = Column(Integer)
-	username = Column(String(16))
-	password = Column(String(40))
-	last_update = Column(DateTime)
-	picture = Column(Integer)
-
-class public.payment(BaseModel):
-	__tablename__ = 'payment' 
-
-	payment_id = Column(Integer, Sequence('payment_payment_id_seq'), primary_key=True)
-	customer_id = Column(Integer, ForeignKey('customer.customer_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	staff_id = Column(Integer, ForeignKey('staff.staff_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	rental_id = Column(Integer, ForeignKey('rental.rental_id', onupdate = "CASCADE", ondelete = "SET NULL"))
-	amount = Column(Integer)
-	payment_date = Column(DateTime)
-
-class public.film(BaseModel):
-	__tablename__ = 'film' 
-
-	film_id = Column(Integer, Sequence('film_film_id_seq'), primary_key=True)
-	title = Column(String(255))
-	description = Column(Integer)
-	release_year = Column(Integer)
-	language_id = Column(Integer, ForeignKey('language.language_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
-	rental_duration = Column(Integer)
-	rental_rate = Column(Integer)
-	length = Column(Integer)
-	replacement_cost = Column(Integer)
-	rating = Column(Integer, Sequence('G'))
-	last_update = Column(DateTime)
-	special_features = Column(Integer)
-	fulltext = Column(Integer)
+	***RELATIONSHIPS***
 

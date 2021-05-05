@@ -1,0 +1,100 @@
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+async def connecttoDatabase():
+	#--HINT:--engine = create_engine('postgresql+psycopg2://user:password@hostname/database_name')
+	engine = create_engine('postgresql+psycopg2://postgres:example@postgres/postgres')
+	Session = sessionmaker(bind=engine)
+	session = Session()
+	return session
+
+
+def connectAllEndpoints(app):
+
+	@app.post("/users")
+	async def createusers(db=Depends(connecttoDatabase), users: usersCreateSchema):
+		*****NECO*****
+		return(***NECO***)
+
+	@app.get("/users")
+	async def getusers(db=Depends(connecttoDatabase), users: usersGetSchema):
+		*****NECO*****
+		return(db.query(public.users).first())
+
+	@app.put("/users")
+	async def updateusers(db=Depends(connecttoDatabase), users: usersUpdateSchema):
+		*****NECO*****
+		usersToUpdate = db.query(public.users).first()
+		db.commit()
+		db.refresh(usersToUpdate)
+		return(usersToUpdate)
+
+	@app.delete("/users")
+	async def deleteusers(db=Depends(connecttoDatabase), users: usersDeleteSchema):
+		*****NECO*****
+
+	@app.post("/usergroups")
+	async def createusergroups(db=Depends(connecttoDatabase), usergroups: usergroupsCreateSchema):
+		*****NECO*****
+		return(***NECO***)
+
+	@app.get("/usergroups")
+	async def getusergroups(db=Depends(connecttoDatabase), usergroups: usergroupsGetSchema):
+		*****NECO*****
+		return(db.query(public.usergroups).first())
+
+	@app.put("/usergroups")
+	async def updateusergroups(db=Depends(connecttoDatabase), usergroups: usergroupsUpdateSchema):
+		*****NECO*****
+		usergroupsToUpdate = db.query(public.usergroups).first()
+		db.commit()
+		db.refresh(usergroupsToUpdate)
+		return(usergroupsToUpdate)
+
+	@app.delete("/usergroups")
+	async def deleteusergroups(db=Depends(connecttoDatabase), usergroups: usergroupsDeleteSchema):
+		*****NECO*****
+
+	@app.post("/groups")
+	async def creategroups(db=Depends(connecttoDatabase), groups: groupsCreateSchema):
+		*****NECO*****
+		return(***NECO***)
+
+	@app.get("/groups")
+	async def getgroups(db=Depends(connecttoDatabase), groups: groupsGetSchema):
+		*****NECO*****
+		return(db.query(public.groups).first())
+
+	@app.put("/groups")
+	async def updategroups(db=Depends(connecttoDatabase), groups: groupsUpdateSchema):
+		*****NECO*****
+		groupsToUpdate = db.query(public.groups).first()
+		db.commit()
+		db.refresh(groupsToUpdate)
+		return(groupsToUpdate)
+
+	@app.delete("/groups")
+	async def deletegroups(db=Depends(connecttoDatabase), groups: groupsDeleteSchema):
+		*****NECO*****
+
+	@app.post("/uzivatel")
+	async def createuzivatel(db=Depends(connecttoDatabase), uzivatel: uzivatelCreateSchema):
+		*****NECO*****
+		return(***NECO***)
+
+	@app.get("/uzivatel")
+	async def getuzivatel(db=Depends(connecttoDatabase), uzivatel: uzivatelGetSchema):
+		*****NECO*****
+		return(db.query(public.uzivatel).first())
+
+	@app.put("/uzivatel")
+	async def updateuzivatel(db=Depends(connecttoDatabase), uzivatel: uzivatelUpdateSchema):
+		*****NECO*****
+		uzivatelToUpdate = db.query(public.uzivatel).first()
+		db.commit()
+		db.refresh(uzivatelToUpdate)
+		return(uzivatelToUpdate)
+
+	@app.delete("/uzivatel")
+	async def deleteuzivatel(db=Depends(connecttoDatabase), uzivatel: uzivatelDeleteSchema):
+		*****NECO*****
