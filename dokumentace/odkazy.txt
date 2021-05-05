@@ -35,3 +35,6 @@ https://ahmed-nafies.medium.com/fastapi-with-sqlalchemy-postgresql-and-alembic-a
 
 SQLAlchemy Column - VŠECHNY??  argumenty:
 https://docs.sqlalchemy.org/en/13/core/metadata.html#sqlalchemy.schema.Column
+
+PODOBNY PRIKLAD (vzor pro generovani dat):
+https://stackoverflow.com/questions/60238433/what-is-the-meaning-of-pydantic-modelsschemas-in-python-while-building-an-api
