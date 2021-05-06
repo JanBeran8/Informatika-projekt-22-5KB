@@ -14,7 +14,11 @@ def connectAllEndpoints(app):
 	@app.post("/users")
 	async def createusers(db=Depends(connecttoDatabase), users: usersCreateSchema):
 		*****NECO*****
-		return(***NECO***)
+		usersRow = public.users(***???neco--jako--name=user.name???***)
+		db.add(usersRow)
+		db.commit()
+		db.refresh(usersRow)
+		return(usersRow)
 
 	@app.get("/users")
 	async def getusers(db=Depends(connecttoDatabase), users: usersGetSchema):
@@ -36,7 +40,11 @@ def connectAllEndpoints(app):
 	@app.post("/usergroups")
 	async def createusergroups(db=Depends(connecttoDatabase), usergroups: usergroupsCreateSchema):
 		*****NECO*****
-		return(***NECO***)
+		usergroupsRow = public.usergroups(***???neco--jako--name=user.name???***)
+		db.add(usergroupsRow)
+		db.commit()
+		db.refresh(usergroupsRow)
+		return(usergroupsRow)
 
 	@app.get("/usergroups")
 	async def getusergroups(db=Depends(connecttoDatabase), usergroups: usergroupsGetSchema):
@@ -58,7 +66,11 @@ def connectAllEndpoints(app):
 	@app.post("/groups")
 	async def creategroups(db=Depends(connecttoDatabase), groups: groupsCreateSchema):
 		*****NECO*****
-		return(***NECO***)
+		groupsRow = public.groups(***???neco--jako--name=user.name???***)
+		db.add(groupsRow)
+		db.commit()
+		db.refresh(groupsRow)
+		return(groupsRow)
 
 	@app.get("/groups")
 	async def getgroups(db=Depends(connecttoDatabase), groups: groupsGetSchema):
@@ -80,7 +92,11 @@ def connectAllEndpoints(app):
 	@app.post("/uzivatel")
 	async def createuzivatel(db=Depends(connecttoDatabase), uzivatel: uzivatelCreateSchema):
 		*****NECO*****
-		return(***NECO***)
+		uzivatelRow = public.uzivatel(***???neco--jako--name=user.name???***)
+		db.add(uzivatelRow)
+		db.commit()
+		db.refresh(uzivatelRow)
+		return(uzivatelRow)
 
 	@app.get("/uzivatel")
 	async def getuzivatel(db=Depends(connecttoDatabase), uzivatel: uzivatelGetSchema):
