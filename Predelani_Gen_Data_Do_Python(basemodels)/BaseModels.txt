@@ -4,7 +4,9 @@ class public.users(BaseModel):
 	id = Column(Integer, primary_key=True)
 	name = Column(String)
 
-	***RELATIONSHIPS***
+	usersRel = relationship('public.usergroups', back_populates='usersRelation')
+
+
 
 class public.usergroups(BaseModel):
 	__tablename__ = 'usergroups' 
@@ -13,7 +15,9 @@ class public.usergroups(BaseModel):
 	user_id = Column(Integer, ForeignKey('users.id', onupdate = "NO ACTION", ondelete = "NO ACTION"))
 	group_id = Column(Integer, ForeignKey('groups.id', onupdate = "NO ACTION", ondelete = "NO ACTION"))
 
-	***RELATIONSHIPS***
+	usersRelation = relationship('public.users', uselist=True, back_populates='usersRel')
+	groupsRelation = relationship('public.groups', uselist=True, back_populates='groupsRel')
+
 
 class public.groups(BaseModel):
 	__tablename__ = 'groups' 
@@ -21,7 +25,9 @@ class public.groups(BaseModel):
 	id = Column(Integer, primary_key=True)
 	name = Column(String)
 
-	***RELATIONSHIPS***
+	groupsRel = relationship('public.usergroups', back_populates='groupsRelation')
+
+
 
 class public.uzivatel(BaseModel):
 	__tablename__ = 'uzivatel' 
@@ -32,5 +38,5 @@ class public.uzivatel(BaseModel):
 	datum_narozeni = Column(Integer)
 	pocet_clanku = Column(Integer)
 
-	***RELATIONSHIPS***
+
 
