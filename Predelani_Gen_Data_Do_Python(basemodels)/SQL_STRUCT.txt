@@ -1,0 +1,670 @@
+class public.actor(BaseModel):
+	__tablename__ = 'actor' 
+
+	actor_id = Column(Integer, Sequence(nextval('actor_actor_id_seq'::regclass)), primary_key=True)
+	first_name = Column(String(45))
+	last_name = Column(String(45))
+	last_update = Column(DateTime, Sequence(now()))
+
+class actorCreateSchema(BaseModel):
+	actor_id: int
+	first_name: str
+	last_name: str
+	last_update: DateTime
+
+class actorGetSchema(BaseModel):
+	actor_id: int
+	first_name: str
+	last_name: str
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class actorUpdateSchema(BaseModel):
+	actor_id: int
+	first_name: str
+	last_name: str
+	last_update: DateTime
+
+class actorDeleteSchema(BaseModel):
+	actor_id: int
+	first_name: str
+	last_name: str
+	last_update: DateTime
+
+
+class public.store(BaseModel):
+	__tablename__ = 'store' 
+
+	store_id = Column(Integer, Sequence(nextval('store_store_id_seq'::regclass)), primary_key=True)
+	manager_staff_id = Column(Integer, ForeignKey('staff.staff_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	address_id = Column(Integer, ForeignKey('address.address_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	last_update = Column(DateTime, Sequence(now()))
+
+class storeCreateSchema(BaseModel):
+	store_id: int
+	manager_staff_id: int
+	address_id: int
+	last_update: DateTime
+
+class storeGetSchema(BaseModel):
+	store_id: int
+	manager_staff_id: int
+	address_id: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class storeUpdateSchema(BaseModel):
+	store_id: int
+	manager_staff_id: int
+	address_id: int
+	last_update: DateTime
+
+class storeDeleteSchema(BaseModel):
+	store_id: int
+	manager_staff_id: int
+	address_id: int
+	last_update: DateTime
+
+
+class public.address(BaseModel):
+	__tablename__ = 'address' 
+
+	address_id = Column(Integer, Sequence(nextval('address_address_id_seq'::regclass)), primary_key=True)
+	address = Column(String(50))
+	address2 = Column(String(50))
+	district = Column(String(20))
+	city_id = Column(Integer, ForeignKey('city.city_id', onupdate = "NO ACTION", ondelete = "NO ACTION"))
+	postal_code = Column(String(10))
+	phone = Column(String(20))
+	last_update = Column(DateTime, Sequence(now()))
+
+class addressCreateSchema(BaseModel):
+	address_id: int
+	address: str
+	address2: str
+	district: str
+	city_id: int
+	postal_code: str
+	phone: str
+	last_update: DateTime
+
+class addressGetSchema(BaseModel):
+	address_id: int
+	address: str
+	address2: str
+	district: str
+	city_id: int
+	postal_code: str
+	phone: str
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class addressUpdateSchema(BaseModel):
+	address_id: int
+	address: str
+	address2: str
+	district: str
+	city_id: int
+	postal_code: str
+	phone: str
+	last_update: DateTime
+
+class addressDeleteSchema(BaseModel):
+	address_id: int
+	address: str
+	address2: str
+	district: str
+	city_id: int
+	postal_code: str
+	phone: str
+	last_update: DateTime
+
+
+class public.category(BaseModel):
+	__tablename__ = 'category' 
+
+	category_id = Column(Integer, Sequence(nextval('category_category_id_seq'::regclass)), primary_key=True)
+	name = Column(String(25))
+	last_update = Column(DateTime, Sequence(now()))
+
+class categoryCreateSchema(BaseModel):
+	category_id: int
+	name: str
+	last_update: DateTime
+
+class categoryGetSchema(BaseModel):
+	category_id: int
+	name: str
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class categoryUpdateSchema(BaseModel):
+	category_id: int
+	name: str
+	last_update: DateTime
+
+class categoryDeleteSchema(BaseModel):
+	category_id: int
+	name: str
+	last_update: DateTime
+
+
+class public.city(BaseModel):
+	__tablename__ = 'city' 
+
+	city_id = Column(Integer, Sequence(nextval('city_city_id_seq'::regclass)), primary_key=True)
+	city = Column(String(50))
+	country_id = Column(Integer, ForeignKey('country.country_id', onupdate = "NO ACTION", ondelete = "NO ACTION"))
+	last_update = Column(DateTime, Sequence(now()))
+
+class cityCreateSchema(BaseModel):
+	city_id: int
+	city: str
+	country_id: int
+	last_update: DateTime
+
+class cityGetSchema(BaseModel):
+	city_id: int
+	city: str
+	country_id: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class cityUpdateSchema(BaseModel):
+	city_id: int
+	city: str
+	country_id: int
+	last_update: DateTime
+
+class cityDeleteSchema(BaseModel):
+	city_id: int
+	city: str
+	country_id: int
+	last_update: DateTime
+
+
+class public.country(BaseModel):
+	__tablename__ = 'country' 
+
+	country_id = Column(Integer, Sequence(nextval('country_country_id_seq'::regclass)), primary_key=True)
+	country = Column(String(50))
+	last_update = Column(DateTime, Sequence(now()))
+
+class countryCreateSchema(BaseModel):
+	country_id: int
+	country: str
+	last_update: DateTime
+
+class countryGetSchema(BaseModel):
+	country_id: int
+	country: str
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class countryUpdateSchema(BaseModel):
+	country_id: int
+	country: str
+	last_update: DateTime
+
+class countryDeleteSchema(BaseModel):
+	country_id: int
+	country: str
+	last_update: DateTime
+
+
+class public.customer(BaseModel):
+	__tablename__ = 'customer' 
+
+	customer_id = Column(Integer, Sequence(nextval('customer_customer_id_seq'::regclass)), primary_key=True)
+	store_id = Column(Integer)
+	first_name = Column(String(45))
+	last_name = Column(String(45))
+	email = Column(String(50))
+	address_id = Column(Integer, ForeignKey('address.address_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	activebool = Column(Integer, Sequence(true))
+	create_date = Column(Integer, Sequence(('now'::text)::date))
+	last_update = Column(DateTime, Sequence(now()))
+	active = Column(Integer)
+
+class customerCreateSchema(BaseModel):
+	customer_id: int
+	store_id: int
+	first_name: str
+	last_name: str
+	email: str
+	address_id: int
+	activebool: int
+	create_date: int
+	last_update: DateTime
+	active: int
+
+class customerGetSchema(BaseModel):
+	customer_id: int
+	store_id: int
+	first_name: str
+	last_name: str
+	email: str
+	address_id: int
+	activebool: int
+	create_date: int
+	last_update: DateTime
+	active: int
+	class Config:
+		orm_mode = True
+	pass
+
+class customerUpdateSchema(BaseModel):
+	customer_id: int
+	store_id: int
+	first_name: str
+	last_name: str
+	email: str
+	address_id: int
+	activebool: int
+	create_date: int
+	last_update: DateTime
+	active: int
+
+class customerDeleteSchema(BaseModel):
+	customer_id: int
+	store_id: int
+	first_name: str
+	last_name: str
+	email: str
+	address_id: int
+	activebool: int
+	create_date: int
+	last_update: DateTime
+	active: int
+
+
+class public.film_actor(BaseModel):
+	__tablename__ = 'film_actor' 
+
+	actor_id = Column(Integer, primary_key=True, ForeignKey('actor.actor_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	film_id = Column(Integer, primary_key=True, ForeignKey('film.film_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	last_update = Column(DateTime, Sequence(now()))
+
+class film_actorCreateSchema(BaseModel):
+	actor_id: int
+	film_id: int
+	last_update: DateTime
+
+class film_actorGetSchema(BaseModel):
+	actor_id: int
+	film_id: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class film_actorUpdateSchema(BaseModel):
+	actor_id: int
+	film_id: int
+	last_update: DateTime
+
+class film_actorDeleteSchema(BaseModel):
+	actor_id: int
+	film_id: int
+	last_update: DateTime
+
+
+class public.film_category(BaseModel):
+	__tablename__ = 'film_category' 
+
+	film_id = Column(Integer, primary_key=True, ForeignKey('film.film_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	category_id = Column(Integer, primary_key=True, ForeignKey('category.category_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	last_update = Column(DateTime, Sequence(now()))
+
+class film_categoryCreateSchema(BaseModel):
+	film_id: int
+	category_id: int
+	last_update: DateTime
+
+class film_categoryGetSchema(BaseModel):
+	film_id: int
+	category_id: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class film_categoryUpdateSchema(BaseModel):
+	film_id: int
+	category_id: int
+	last_update: DateTime
+
+class film_categoryDeleteSchema(BaseModel):
+	film_id: int
+	category_id: int
+	last_update: DateTime
+
+
+class public.inventory(BaseModel):
+	__tablename__ = 'inventory' 
+
+	inventory_id = Column(Integer, Sequence(nextval('inventory_inventory_id_seq'::regclass)), primary_key=True)
+	film_id = Column(Integer, ForeignKey('film.film_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	store_id = Column(Integer)
+	last_update = Column(DateTime, Sequence(now()))
+
+class inventoryCreateSchema(BaseModel):
+	inventory_id: int
+	film_id: int
+	store_id: int
+	last_update: DateTime
+
+class inventoryGetSchema(BaseModel):
+	inventory_id: int
+	film_id: int
+	store_id: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class inventoryUpdateSchema(BaseModel):
+	inventory_id: int
+	film_id: int
+	store_id: int
+	last_update: DateTime
+
+class inventoryDeleteSchema(BaseModel):
+	inventory_id: int
+	film_id: int
+	store_id: int
+	last_update: DateTime
+
+
+class public.language(BaseModel):
+	__tablename__ = 'language' 
+
+	language_id = Column(Integer, Sequence(nextval('language_language_id_seq'::regclass)), primary_key=True)
+	name = Column(Integer)
+	last_update = Column(DateTime, Sequence(now()))
+
+class languageCreateSchema(BaseModel):
+	language_id: int
+	name: int
+	last_update: DateTime
+
+class languageGetSchema(BaseModel):
+	language_id: int
+	name: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class languageUpdateSchema(BaseModel):
+	language_id: int
+	name: int
+	last_update: DateTime
+
+class languageDeleteSchema(BaseModel):
+	language_id: int
+	name: int
+	last_update: DateTime
+
+
+class public.rental(BaseModel):
+	__tablename__ = 'rental' 
+
+	rental_id = Column(Integer, Sequence(nextval('rental_rental_id_seq'::regclass)), primary_key=True)
+	rental_date = Column(DateTime)
+	inventory_id = Column(Integer, ForeignKey('inventory.inventory_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	customer_id = Column(Integer, ForeignKey('customer.customer_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	return_date = Column(DateTime)
+	staff_id = Column(Integer, ForeignKey('staff.staff_id', onupdate = "NO ACTION", ondelete = "NO ACTION"))
+	last_update = Column(DateTime, Sequence(now()))
+
+class rentalCreateSchema(BaseModel):
+	rental_id: int
+	rental_date: DateTime
+	inventory_id: int
+	customer_id: int
+	return_date: DateTime
+	staff_id: int
+	last_update: DateTime
+
+class rentalGetSchema(BaseModel):
+	rental_id: int
+	rental_date: DateTime
+	inventory_id: int
+	customer_id: int
+	return_date: DateTime
+	staff_id: int
+	last_update: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class rentalUpdateSchema(BaseModel):
+	rental_id: int
+	rental_date: DateTime
+	inventory_id: int
+	customer_id: int
+	return_date: DateTime
+	staff_id: int
+	last_update: DateTime
+
+class rentalDeleteSchema(BaseModel):
+	rental_id: int
+	rental_date: DateTime
+	inventory_id: int
+	customer_id: int
+	return_date: DateTime
+	staff_id: int
+	last_update: DateTime
+
+
+class public.staff(BaseModel):
+	__tablename__ = 'staff' 
+
+	staff_id = Column(Integer, Sequence(nextval('staff_staff_id_seq'::regclass)), primary_key=True)
+	first_name = Column(String(45))
+	last_name = Column(String(45))
+	address_id = Column(Integer, ForeignKey('address.address_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	email = Column(String(50))
+	store_id = Column(Integer)
+	active = Column(Integer, Sequence(true))
+	username = Column(String(16))
+	password = Column(String(40))
+	last_update = Column(DateTime, Sequence(now()))
+	picture = Column(Integer)
+
+class staffCreateSchema(BaseModel):
+	staff_id: int
+	first_name: str
+	last_name: str
+	address_id: int
+	email: str
+	store_id: int
+	active: int
+	username: str
+	password: str
+	last_update: DateTime
+	picture: int
+
+class staffGetSchema(BaseModel):
+	staff_id: int
+	first_name: str
+	last_name: str
+	address_id: int
+	email: str
+	store_id: int
+	active: int
+	username: str
+	password: str
+	last_update: DateTime
+	picture: int
+	class Config:
+		orm_mode = True
+	pass
+
+class staffUpdateSchema(BaseModel):
+	staff_id: int
+	first_name: str
+	last_name: str
+	address_id: int
+	email: str
+	store_id: int
+	active: int
+	username: str
+	password: str
+	last_update: DateTime
+	picture: int
+
+class staffDeleteSchema(BaseModel):
+	staff_id: int
+	first_name: str
+	last_name: str
+	address_id: int
+	email: str
+	store_id: int
+	active: int
+	username: str
+	password: str
+	last_update: DateTime
+	picture: int
+
+
+class public.payment(BaseModel):
+	__tablename__ = 'payment' 
+
+	payment_id = Column(Integer, Sequence(nextval('payment_payment_id_seq'::regclass)), primary_key=True)
+	customer_id = Column(Integer, ForeignKey('customer.customer_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	staff_id = Column(Integer, ForeignKey('staff.staff_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	rental_id = Column(Integer, ForeignKey('rental.rental_id', onupdate = "CASCADE", ondelete = "SET NULL"))
+	amount = Column(Integer)
+	payment_date = Column(DateTime)
+
+class paymentCreateSchema(BaseModel):
+	payment_id: int
+	customer_id: int
+	staff_id: int
+	rental_id: int
+	amount: int
+	payment_date: DateTime
+
+class paymentGetSchema(BaseModel):
+	payment_id: int
+	customer_id: int
+	staff_id: int
+	rental_id: int
+	amount: int
+	payment_date: DateTime
+	class Config:
+		orm_mode = True
+	pass
+
+class paymentUpdateSchema(BaseModel):
+	payment_id: int
+	customer_id: int
+	staff_id: int
+	rental_id: int
+	amount: int
+	payment_date: DateTime
+
+class paymentDeleteSchema(BaseModel):
+	payment_id: int
+	customer_id: int
+	staff_id: int
+	rental_id: int
+	amount: int
+	payment_date: DateTime
+
+
+class public.film(BaseModel):
+	__tablename__ = 'film' 
+
+	film_id = Column(Integer, Sequence(nextval('film_film_id_seq'::regclass)), primary_key=True)
+	title = Column(String(255))
+	description = Column(Integer)
+	release_year = Column(Integer)
+	language_id = Column(Integer, ForeignKey('language.language_id', onupdate = "CASCADE", ondelete = "RESTRICT"))
+	rental_duration = Column(Integer, Sequence(3))
+	rental_rate = Column(Integer, Sequence(4.99))
+	length = Column(Integer)
+	replacement_cost = Column(Integer, Sequence(19.99))
+	rating = Column(Integer, Sequence('G'::mpaa_rating))
+	last_update = Column(DateTime, Sequence(now()))
+	special_features = Column(Integer)
+	fulltext = Column(Integer)
+
+class filmCreateSchema(BaseModel):
+	film_id: int
+	title: str
+	description: int
+	release_year: int
+	language_id: int
+	rental_duration: int
+	rental_rate: int
+	length: int
+	replacement_cost: int
+	rating: int
+	last_update: DateTime
+	special_features: int
+	fulltext: int
+
+class filmGetSchema(BaseModel):
+	film_id: int
+	title: str
+	description: int
+	release_year: int
+	language_id: int
+	rental_duration: int
+	rental_rate: int
+	length: int
+	replacement_cost: int
+	rating: int
+	last_update: DateTime
+	special_features: int
+	fulltext: int
+	class Config:
+		orm_mode = True
+	pass
+
+class filmUpdateSchema(BaseModel):
+	film_id: int
+	title: str
+	description: int
+	release_year: int
+	language_id: int
+	rental_duration: int
+	rental_rate: int
+	length: int
+	replacement_cost: int
+	rating: int
+	last_update: DateTime
+	special_features: int
+	fulltext: int
+
+class filmDeleteSchema(BaseModel):
+	film_id: int
+	title: str
+	description: int
+	release_year: int
+	language_id: int
+	rental_duration: int
+	rental_rate: int
+	length: int
+	replacement_cost: int
+	rating: int
+	last_update: DateTime
+	special_features: int
+	fulltext: int
+
+
