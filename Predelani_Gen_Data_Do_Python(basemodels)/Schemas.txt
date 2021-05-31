@@ -1,5 +1,5 @@
 from typing import List, Optional
-from pydantic import BaseModel as BaseSchema       #ZDE BY NEBYLO NUTNE ?? je to jiny soubor proto muzem pouzit BaseModel ????
+from pydantic import BaseModel as BaseSchema       
 
 
 class usersCreateSchema(BaseSchema):
