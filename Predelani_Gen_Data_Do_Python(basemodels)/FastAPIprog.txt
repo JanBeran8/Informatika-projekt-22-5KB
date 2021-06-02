@@ -16,99 +16,108 @@ async def connecttoDatabase(KnownDatabase):
 	session = Session()
 	return session
 
+def get_db():
+	db = Session()
+	try:
+		yield db
+	finally:
+		db.close()
 
 def connectAllEndpoints(app):
 
-	@app.post("/users")
-	async def createusers(db: Depends(connecttoDatabase(KnownDatabase)), users: Schemas.usersCreateSchema):
+	@app.post("/users", response_model=usersGetSchema)
+	async def createusers(users: Schemas.usersCreateSchema,db: Session=Depends(get_db)):
 		usersRow = publicusers(name=users.name)
 		db.add(usersRow)
 		db.commit()
 		db.refresh(usersRow)
-		return(usersRow)
+		result = await (usersRow)
+		return result
 
-	@app.get("/users")
-	async def getusers(db: Depends(connecttoDatabase(KnownDatabase)), users: Schemas.usersGetSchema):
+	@app.get("/users", response_model=usersGetSchema)
+	async def getusers(users: Schemas.usersGetSchema, db: Session=Depends(get_db))):
 		return(db.query(publicusers).first())
 	async def getAllusers(db: Depends(connecttoDatabase(KnownDatabase)), skip: int = 0, limit: int = 100):
 		return(db.query(publicusers).offset(skip).limit(limit).all())
 
-	@app.put("/users")
-	async def updateusers(db: Depends(connecttoDatabase(KnownDatabase)), users: Schemas.usersUpdateSchema):
+	@app.put("/users", response_model=usersGetSchema)
+	async def updateusers(users: Schemas.usersUpdateSchema, db: Session=Depends(get_db))):
 		usersToUpdate = db.query(publicusers).first()
 		db.commit()
 		db.refresh(usersToUpdate)
 		return(usersToUpdate)
 
-	@app.delete("/users")
-	async def deleteusers(db: Depends(connecttoDatabase(KnownDatabase)), users: Schemas.usersDeleteSchema):
+	@app.delete("/users", response_model=usersGetSchema)
+	async def deleteusers(users: Schemas.usersDeleteSchema, db: Session=Depends(get_db))):
 		users_to_delete = db.query(publicusers).filter(publicusers == users).first()
 		db.delete(users_to_delete)
 		db.comit()
 		db.refresh(users_to_delete)
 		return(users_to_delete)
 
-	@app.post("/usergroups")
-	async def createusergroups(db: Depends(connecttoDatabase(KnownDatabase)), usergroups: Schemas.usergroupsCreateSchema):
+	@app.post("/usergroups", response_model=usergroupsGetSchema)
+	async def createusergroups(usergroups: Schemas.usergroupsCreateSchema,db: Session=Depends(get_db)):
 		usergroupsRow = publicusergroups(user_id=usergroups.user_id)
 		usergroupsRow = publicusergroups(group_id=usergroups.group_id)
 		db.add(usergroupsRow)
 		db.commit()
 		db.refresh(usergroupsRow)
-		return(usergroupsRow)
+		result = await (usergroupsRow)
+		return result
 
-	@app.get("/usergroups")
-	async def getusergroups(db: Depends(connecttoDatabase(KnownDatabase)), usergroups: Schemas.usergroupsGetSchema):
+	@app.get("/usergroups", response_model=usergroupsGetSchema)
+	async def getusergroups(usergroups: Schemas.usergroupsGetSchema, db: Session=Depends(get_db))):
 		return(db.query(publicusergroups).first())
 	async def getAllusergroups(db: Depends(connecttoDatabase(KnownDatabase)), skip: int = 0, limit: int = 100):
 		return(db.query(publicusergroups).offset(skip).limit(limit).all())
 
-	@app.put("/usergroups")
-	async def updateusergroups(db: Depends(connecttoDatabase(KnownDatabase)), usergroups: Schemas.usergroupsUpdateSchema):
+	@app.put("/usergroups", response_model=usergroupsGetSchema)
+	async def updateusergroups(usergroups: Schemas.usergroupsUpdateSchema, db: Session=Depends(get_db))):
 		usergroupsToUpdate = db.query(publicusergroups).first()
 		db.commit()
 		db.refresh(usergroupsToUpdate)
 		return(usergroupsToUpdate)
 
-	@app.delete("/usergroups")
-	async def deleteusergroups(db: Depends(connecttoDatabase(KnownDatabase)), usergroups: Schemas.usergroupsDeleteSchema):
+	@app.delete("/usergroups", response_model=usergroupsGetSchema)
+	async def deleteusergroups(usergroups: Schemas.usergroupsDeleteSchema, db: Session=Depends(get_db))):
 		usergroups_to_delete = db.query(publicusergroups).filter(publicusergroups == usergroups).first()
 		db.delete(usergroups_to_delete)
 		db.comit()
 		db.refresh(usergroups_to_delete)
 		return(usergroups_to_delete)
 
-	@app.post("/groups")
-	async def creategroups(db: Depends(connecttoDatabase(KnownDatabase)), groups: Schemas.groupsCreateSchema):
+	@app.post("/groups", response_model=groupsGetSchema)
+	async def creategroups(groups: Schemas.groupsCreateSchema,db: Session=Depends(get_db)):
 		groupsRow = publicgroups(name=groups.name)
 		db.add(groupsRow)
 		db.commit()
 		db.refresh(groupsRow)
-		return(groupsRow)
+		result = await (groupsRow)
+		return result
 
-	@app.get("/groups")
-	async def getgroups(db: Depends(connecttoDatabase(KnownDatabase)), groups: Schemas.groupsGetSchema):
+	@app.get("/groups", response_model=groupsGetSchema)
+	async def getgroups(groups: Schemas.groupsGetSchema, db: Session=Depends(get_db))):
 		return(db.query(publicgroups).first())
 	async def getAllgroups(db: Depends(connecttoDatabase(KnownDatabase)), skip: int = 0, limit: int = 100):
 		return(db.query(publicgroups).offset(skip).limit(limit).all())
 
-	@app.put("/groups")
-	async def updategroups(db: Depends(connecttoDatabase(KnownDatabase)), groups: Schemas.groupsUpdateSchema):
+	@app.put("/groups", response_model=groupsGetSchema)
+	async def updategroups(groups: Schemas.groupsUpdateSchema, db: Session=Depends(get_db))):
 		groupsToUpdate = db.query(publicgroups).first()
 		db.commit()
 		db.refresh(groupsToUpdate)
 		return(groupsToUpdate)
 
-	@app.delete("/groups")
-	async def deletegroups(db: Depends(connecttoDatabase(KnownDatabase)), groups: Schemas.groupsDeleteSchema):
+	@app.delete("/groups", response_model=groupsGetSchema)
+	async def deletegroups(groups: Schemas.groupsDeleteSchema, db: Session=Depends(get_db))):
 		groups_to_delete = db.query(publicgroups).filter(publicgroups == groups).first()
 		db.delete(groups_to_delete)
 		db.comit()
 		db.refresh(groups_to_delete)
 		return(groups_to_delete)
 
-	@app.post("/uzivatel")
-	async def createuzivatel(db: Depends(connecttoDatabase(KnownDatabase)), uzivatel: Schemas.uzivatelCreateSchema):
+	@app.post("/uzivatel", response_model=uzivatelGetSchema)
+	async def createuzivatel(uzivatel: Schemas.uzivatelCreateSchema,db: Session=Depends(get_db)):
 		uzivatelRow = publicuzivatel(jmeno=uzivatel.jmeno)
 		uzivatelRow = publicuzivatel(prijmeni=uzivatel.prijmeni)
 		uzivatelRow = publicuzivatel(datum_narozeni=uzivatel.datum_narozeni)
@@ -116,23 +125,24 @@ def connectAllEndpoints(app):
 		db.add(uzivatelRow)
 		db.commit()
 		db.refresh(uzivatelRow)
-		return(uzivatelRow)
+		result = await (uzivatelRow)
+		return result
 
-	@app.get("/uzivatel")
-	async def getuzivatel(db: Depends(connecttoDatabase(KnownDatabase)), uzivatel: Schemas.uzivatelGetSchema):
+	@app.get("/uzivatel", response_model=uzivatelGetSchema)
+	async def getuzivatel(uzivatel: Schemas.uzivatelGetSchema, db: Session=Depends(get_db))):
 		return(db.query(publicuzivatel).first())
 	async def getAlluzivatel(db: Depends(connecttoDatabase(KnownDatabase)), skip: int = 0, limit: int = 100):
 		return(db.query(publicuzivatel).offset(skip).limit(limit).all())
 
-	@app.put("/uzivatel")
-	async def updateuzivatel(db: Depends(connecttoDatabase(KnownDatabase)), uzivatel: Schemas.uzivatelUpdateSchema):
+	@app.put("/uzivatel", response_model=uzivatelGetSchema)
+	async def updateuzivatel(uzivatel: Schemas.uzivatelUpdateSchema, db: Session=Depends(get_db))):
 		uzivatelToUpdate = db.query(publicuzivatel).first()
 		db.commit()
 		db.refresh(uzivatelToUpdate)
 		return(uzivatelToUpdate)
 
-	@app.delete("/uzivatel")
-	async def deleteuzivatel(db: Depends(connecttoDatabase(KnownDatabase)), uzivatel: Schemas.uzivatelDeleteSchema):
+	@app.delete("/uzivatel", response_model=uzivatelGetSchema)
+	async def deleteuzivatel(uzivatel: Schemas.uzivatelDeleteSchema, db: Session=Depends(get_db))):
 		uzivatel_to_delete = db.query(publicuzivatel).filter(publicuzivatel == uzivatel).first()
 		db.delete(uzivatel_to_delete)
 		db.comit()
