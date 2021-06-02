@@ -14,11 +14,9 @@ téma č. 2 - Realizujte API generátor pomocí knihovny FastAPI s autentizací 
                                   - Read_Multiple - ❌
                                   - Read - ❌
 
-4) Schemas vygenerovat zvlášť to texťáku - ✔️
-------------------------------------------------------------------------                                 
-5) DODELAT v programu:
-6) INDEX?? - ???
-7) zkontrolovat zda vygenerované TYPY fungují v Pythonu, kdyžtak je nahradit !!! - ❌
-8) DEDICNOST schemat - ✔️
-9) RELATIONSHIPS u modelu - ✔️
+Schemas vygenerovat zvlášť to texťáku - ✔️
+
+------------------------------------------------------------------------    
+DODELAT v programu:
+Podívat se znovu na CRUD operace a tvoření endpointů podle https://fastapi.tiangolo.com/tutorial/sql-databases/
 ------------------------------------------------------------------------
