@@ -16,6 +16,15 @@ téma č. 2 - Realizujte API generátor pomocí knihovny FastAPI s autentizací 
 
 Schemas vygenerovat zvlášť to texťáku - ✔️
 
+-------------------------------------------------------------------------
+
+- Výsledný projekt je uložený na public úložišti Github (ihned od začátku). - ✔️
+- WEB Root API či UI je konfigurovatelný (URI). - ❓
+- Klíčové funkcionality jsou popsány a demonstrovány pomocí notebooku v Jupyteru. - ❌
+- Je definovaný dockerfile / compose.yml pro spuštění výsledného projektu v prostředí docker. - ❌
+- Docker images jsou publikovány na hub.docker.com - ❌
+- Je nastavena otevřená licence (MIT). - ✔️
+
 ------------------------------------------------------------------------    
 DODELAT v programu:
 Podívat se znovu na CRUD operace a tvoření endpointů podle https://fastapi.tiangolo.com/tutorial/sql-databases/
