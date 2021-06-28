@@ -42,21 +42,6 @@ def get_db():
 
 def connectAllEndpoints(app):
 
-	@app.post("/users/{name_ed}", response_model=usersGetSchema)
-	def createusers(name_ed: str,users:usersCreateSchema,db: Session=Depends(get_db)):
-		usersRow_name = db.query(publicusers).filter(publicusers.name == name_ed).first()
-		if usersRow_name:
-			raise HTTPException(status_code=400, detail="Error: This name already exist!")
-		gen_id=0
-		while (db.query(publicusers).filter(publicusers.id == gen_id).first()):
-			gen_id=gen_id+1
-		usersCreateRow_name = publicusers(id = gen_id, name = name_ed)
-		db.add(usersCreateRow_name)
-		db.commit()
-		db.refresh(usersCreateRow_name)
-		result = (usersCreateRow_name)
-		return result
-
 	@app.get("/users/{name_ed}", response_model=usersGetSchema)
 	def read_users(name_ed: str, db: Session=Depends(get_db)):
 		usersResult_name = db.query(publicusers).filter(publicusers.name == name_ed).first()
@@ -69,6 +54,22 @@ def connectAllEndpoints(app):
 	def getAllusers(skip: int = 0, limit: int = 100, db: Session=Depends(get_db)):
 		usersResult = db.query(publicusers).offset(skip).limit(limit).all()
 		return usersResult
+
+	@app.post("/users/{id_ed}/{name_ed}", response_model=usersGetSchema)
+	def createusers(id_ed: int, name_ed: str, users:usersCreateSchema,db: Session=Depends(get_db)):
+		usersRow_id = db.query(publicusers).filter(publicusers.id == id_ed).first()
+		if usersRow_id:
+			raise HTTPException(status_code=400, detail="Error: This id already exist!")
+		#gen_id=0
+		#while (db.query(publicusers).filter(publicusers.id == gen_id).first()):
+			#gen_id=gen_id+1
+		#usersCreateRow_name = publicusers(id = gen_id, name = name_ed)
+		usersCreateRow_name = publicusers(id=id_ed, name=name_ed)
+		db.add(usersCreateRow_name)
+		db.commit()
+		db.refresh(usersCreateRow_name)
+		result = (usersCreateRow_name)
+		return result
 
 	@app.put("/users", response_model=usersGetSchema)
 	def updateusers(users: usersUpdateSchema, db: Session=Depends(get_db)):
@@ -85,21 +86,6 @@ def connectAllEndpoints(app):
 		db.refresh(users_to_delete)
 		return users_to_delete
 
-	@app.post("/usergroups/{user_id_ed}", response_model=usergroupsGetSchema)
-	def createusergroups(user_id_ed: int,usergroups:usergroupsCreateSchema,db: Session=Depends(get_db)):
-		usergroupsRow_user_id = db.query(publicusergroups).filter(publicusergroups.user_id == user_id_ed).first()
-		if usergroupsRow_user_id:
-			raise HTTPException(status_code=400, detail="Error: This user_id already exist!")
-		gen_id=0
-		while (db.query(publicusergroups).filter(publicusergroups.id == gen_id).first()):
-			gen_id=gen_id+1
-		usergroupsCreateRow_user_id = publicusergroups(id = gen_id, user_id = user_id_ed)
-		db.add(usergroupsCreateRow_user_id)
-		db.commit()
-		db.refresh(usergroupsCreateRow_user_id)
-		result = (usergroupsCreateRow_user_id)
-		return result
-
 	@app.get("/usergroups/{user_id_ed}", response_model=usergroupsGetSchema)
 	def read_usergroups(user_id_ed: int, db: Session=Depends(get_db)):
 		usergroupsResult_user_id = db.query(publicusergroups).filter(publicusergroups.user_id == user_id_ed).first()
@@ -107,21 +93,6 @@ def connectAllEndpoints(app):
 			raise HTTPException(status_code=404, detail="Error: This user_id wasnt found!")
 		else:
 			return usergroupsResult_user_id
-
-	@app.post("/usergroups/{group_id_ed}", response_model=usergroupsGetSchema)
-	def createusergroups(group_id_ed: int,usergroups:usergroupsCreateSchema,db: Session=Depends(get_db)):
-		usergroupsRow_group_id = db.query(publicusergroups).filter(publicusergroups.group_id == group_id_ed).first()
-		if usergroupsRow_group_id:
-			raise HTTPException(status_code=400, detail="Error: This group_id already exist!")
-		gen_id=0
-		while (db.query(publicusergroups).filter(publicusergroups.id == gen_id).first()):
-			gen_id=gen_id+1
-		usergroupsCreateRow_group_id = publicusergroups(id = gen_id, group_id = group_id_ed)
-		db.add(usergroupsCreateRow_group_id)
-		db.commit()
-		db.refresh(usergroupsCreateRow_group_id)
-		result = (usergroupsCreateRow_group_id)
-		return result
 
 	@app.get("/usergroups/{group_id_ed}", response_model=usergroupsGetSchema)
 	def read_usergroups(group_id_ed: int, db: Session=Depends(get_db)):
@@ -135,6 +106,22 @@ def connectAllEndpoints(app):
 	def getAllusergroups(skip: int = 0, limit: int = 100, db: Session=Depends(get_db)):
 		usergroupsResult = db.query(publicusergroups).offset(skip).limit(limit).all()
 		return usergroupsResult
+
+	@app.post("/usergroups/{id_ed}/{user_id_ed}/{group_id_ed}", response_model=usergroupsGetSchema)
+	def createusergroups(id_ed: int, user_id_ed: int, group_id_ed: int, usergroups:usergroupsCreateSchema,db: Session=Depends(get_db)):
+		usergroupsRow_id = db.query(publicusergroups).filter(publicusergroups.id == id_ed).first()
+		if usergroupsRow_id:
+			raise HTTPException(status_code=400, detail="Error: This id already exist!")
+		#gen_id=0
+		#while (db.query(publicusergroups).filter(publicusergroups.id == gen_id).first()):
+			#gen_id=gen_id+1
+		#usergroupsCreateRow_group_id = publicusergroups(id = gen_id, group_id = group_id_ed)
+		usergroupsCreateRow_group_id = publicusergroups(id=id_ed, user_id=user_id_ed, group_id=group_id_ed)
+		db.add(usergroupsCreateRow_group_id)
+		db.commit()
+		db.refresh(usergroupsCreateRow_group_id)
+		result = (usergroupsCreateRow_group_id)
+		return result
 
 	@app.put("/usergroups", response_model=usergroupsGetSchema)
 	def updateusergroups(usergroups: usergroupsUpdateSchema, db: Session=Depends(get_db)):
@@ -151,21 +138,6 @@ def connectAllEndpoints(app):
 		db.refresh(usergroups_to_delete)
 		return usergroups_to_delete
 
-	@app.post("/groups/{name_ed}", response_model=groupsGetSchema)
-	def creategroups(name_ed: str,groups:groupsCreateSchema,db: Session=Depends(get_db)):
-		groupsRow_name = db.query(publicgroups).filter(publicgroups.name == name_ed).first()
-		if groupsRow_name:
-			raise HTTPException(status_code=400, detail="Error: This name already exist!")
-		gen_id=0
-		while (db.query(publicgroups).filter(publicgroups.id == gen_id).first()):
-			gen_id=gen_id+1
-		groupsCreateRow_name = publicgroups(id = gen_id, name = name_ed)
-		db.add(groupsCreateRow_name)
-		db.commit()
-		db.refresh(groupsCreateRow_name)
-		result = (groupsCreateRow_name)
-		return result
-
 	@app.get("/groups/{name_ed}", response_model=groupsGetSchema)
 	def read_groups(name_ed: str, db: Session=Depends(get_db)):
 		groupsResult_name = db.query(publicgroups).filter(publicgroups.name == name_ed).first()
@@ -178,6 +150,22 @@ def connectAllEndpoints(app):
 	def getAllgroups(skip: int = 0, limit: int = 100, db: Session=Depends(get_db)):
 		groupsResult = db.query(publicgroups).offset(skip).limit(limit).all()
 		return groupsResult
+
+	@app.post("/groups/{id_ed}/{name_ed}", response_model=groupsGetSchema)
+	def creategroups(id_ed: int, name_ed: str, groups:groupsCreateSchema,db: Session=Depends(get_db)):
+		groupsRow_id = db.query(publicgroups).filter(publicgroups.id == id_ed).first()
+		if groupsRow_id:
+			raise HTTPException(status_code=400, detail="Error: This id already exist!")
+		#gen_id=0
+		#while (db.query(publicgroups).filter(publicgroups.id == gen_id).first()):
+			#gen_id=gen_id+1
+		#groupsCreateRow_name = publicgroups(id = gen_id, name = name_ed)
+		groupsCreateRow_name = publicgroups(id=id_ed, name=name_ed)
+		db.add(groupsCreateRow_name)
+		db.commit()
+		db.refresh(groupsCreateRow_name)
+		result = (groupsCreateRow_name)
+		return result
 
 	@app.put("/groups", response_model=groupsGetSchema)
 	def updategroups(groups: groupsUpdateSchema, db: Session=Depends(get_db)):
@@ -194,21 +182,6 @@ def connectAllEndpoints(app):
 		db.refresh(groups_to_delete)
 		return groups_to_delete
 
-	@app.post("/uzivatel/{jmeno_ed}", response_model=uzivatelGetSchema)
-	def createuzivatel(jmeno_ed: str,uzivatel:uzivatelCreateSchema,db: Session=Depends(get_db)):
-		uzivatelRow_jmeno = db.query(publicuzivatel).filter(publicuzivatel.jmeno == jmeno_ed).first()
-		if uzivatelRow_jmeno:
-			raise HTTPException(status_code=400, detail="Error: This jmeno already exist!")
-		gen_id=0
-		while (db.query(publicuzivatel).filter(publicuzivatel.id == gen_id).first()):
-			gen_id=gen_id+1
-		uzivatelCreateRow_jmeno = publicuzivatel(id = gen_id, jmeno = jmeno_ed)
-		db.add(uzivatelCreateRow_jmeno)
-		db.commit()
-		db.refresh(uzivatelCreateRow_jmeno)
-		result = (uzivatelCreateRow_jmeno)
-		return result
-
 	@app.get("/uzivatel/{jmeno_ed}", response_model=uzivatelGetSchema)
 	def read_uzivatel(jmeno_ed: str, db: Session=Depends(get_db)):
 		uzivatelResult_jmeno = db.query(publicuzivatel).filter(publicuzivatel.jmeno == jmeno_ed).first()
@@ -216,21 +189,6 @@ def connectAllEndpoints(app):
 			raise HTTPException(status_code=404, detail="Error: This jmeno wasnt found!")
 		else:
 			return uzivatelResult_jmeno
-
-	@app.post("/uzivatel/{prijmeni_ed}", response_model=uzivatelGetSchema)
-	def createuzivatel(prijmeni_ed: str,uzivatel:uzivatelCreateSchema,db: Session=Depends(get_db)):
-		uzivatelRow_prijmeni = db.query(publicuzivatel).filter(publicuzivatel.prijmeni == prijmeni_ed).first()
-		if uzivatelRow_prijmeni:
-			raise HTTPException(status_code=400, detail="Error: This prijmeni already exist!")
-		gen_id=0
-		while (db.query(publicuzivatel).filter(publicuzivatel.id == gen_id).first()):
-			gen_id=gen_id+1
-		uzivatelCreateRow_prijmeni = publicuzivatel(id = gen_id, prijmeni = prijmeni_ed)
-		db.add(uzivatelCreateRow_prijmeni)
-		db.commit()
-		db.refresh(uzivatelCreateRow_prijmeni)
-		result = (uzivatelCreateRow_prijmeni)
-		return result
 
 	@app.get("/uzivatel/{prijmeni_ed}", response_model=uzivatelGetSchema)
 	def read_uzivatel(prijmeni_ed: str, db: Session=Depends(get_db)):
@@ -240,43 +198,13 @@ def connectAllEndpoints(app):
 		else:
 			return uzivatelResult_prijmeni
 
-	@app.post("/uzivatel/{datum_narozeni_ed}", response_model=uzivatelGetSchema)
-	def createuzivatel(datum_narozeni_ed: int,uzivatel:uzivatelCreateSchema,db: Session=Depends(get_db)):
-		uzivatelRow_datum_narozeni = db.query(publicuzivatel).filter(publicuzivatel.datum_narozeni == datum_narozeni_ed).first()
-		if uzivatelRow_datum_narozeni:
-			raise HTTPException(status_code=400, detail="Error: This datum_narozeni already exist!")
-		gen_id=0
-		while (db.query(publicuzivatel).filter(publicuzivatel.id == gen_id).first()):
-			gen_id=gen_id+1
-		uzivatelCreateRow_datum_narozeni = publicuzivatel(id = gen_id, datum_narozeni = datum_narozeni_ed)
-		db.add(uzivatelCreateRow_datum_narozeni)
-		db.commit()
-		db.refresh(uzivatelCreateRow_datum_narozeni)
-		result = (uzivatelCreateRow_datum_narozeni)
-		return result
-
 	@app.get("/uzivatel/{datum_narozeni_ed}", response_model=uzivatelGetSchema)
-	def read_uzivatel(datum_narozeni_ed: int, db: Session=Depends(get_db)):
+	def read_uzivatel(datum_narozeni_ed: date, db: Session=Depends(get_db)):
 		uzivatelResult_datum_narozeni = db.query(publicuzivatel).filter(publicuzivatel.datum_narozeni == datum_narozeni_ed).first()
 		if (uzivatelResult_datum_narozeni is None):
 			raise HTTPException(status_code=404, detail="Error: This datum_narozeni wasnt found!")
 		else:
 			return uzivatelResult_datum_narozeni
-
-	@app.post("/uzivatel/{pocet_clanku_ed}", response_model=uzivatelGetSchema)
-	def createuzivatel(pocet_clanku_ed: int,uzivatel:uzivatelCreateSchema,db: Session=Depends(get_db)):
-		uzivatelRow_pocet_clanku = db.query(publicuzivatel).filter(publicuzivatel.pocet_clanku == pocet_clanku_ed).first()
-		if uzivatelRow_pocet_clanku:
-			raise HTTPException(status_code=400, detail="Error: This pocet_clanku already exist!")
-		gen_id=0
-		while (db.query(publicuzivatel).filter(publicuzivatel.id == gen_id).first()):
-			gen_id=gen_id+1
-		uzivatelCreateRow_pocet_clanku = publicuzivatel(id = gen_id, pocet_clanku = pocet_clanku_ed)
-		db.add(uzivatelCreateRow_pocet_clanku)
-		db.commit()
-		db.refresh(uzivatelCreateRow_pocet_clanku)
-		result = (uzivatelCreateRow_pocet_clanku)
-		return result
 
 	@app.get("/uzivatel/{pocet_clanku_ed}", response_model=uzivatelGetSchema)
 	def read_uzivatel(pocet_clanku_ed: int, db: Session=Depends(get_db)):
@@ -290,6 +218,22 @@ def connectAllEndpoints(app):
 	def getAlluzivatel(skip: int = 0, limit: int = 100, db: Session=Depends(get_db)):
 		uzivatelResult = db.query(publicuzivatel).offset(skip).limit(limit).all()
 		return uzivatelResult
+
+	@app.post("/uzivatel/{uzivatele_id_ed}/{jmeno_ed}/{prijmeni_ed}/{datum_narozeni_ed}/{pocet_clanku_ed}", response_model=uzivatelGetSchema)
+	def createuzivatel(uzivatele_id_ed: int, jmeno_ed: str, prijmeni_ed: str, datum_narozeni_ed: date, pocet_clanku_ed: int, uzivatel:uzivatelCreateSchema,db: Session=Depends(get_db)):
+		uzivatelRow_uzivatele_id = db.query(publicuzivatel).filter(publicuzivatel.uzivatele_id == uzivatele_id_ed).first()
+		if uzivatelRow_uzivatele_id:
+			raise HTTPException(status_code=400, detail="Error: This uzivatele_id already exist!")
+		#gen_id=0
+		#while (db.query(publicuzivatel).filter(publicuzivatel.id == gen_id).first()):
+			#gen_id=gen_id+1
+		#uzivatelCreateRow_pocet_clanku = publicuzivatel(id = gen_id, pocet_clanku = pocet_clanku_ed)
+		uzivatelCreateRow_pocet_clanku = publicuzivatel(uzivatele_id=uzivatele_id_ed, jmeno=jmeno_ed, prijmeni=prijmeni_ed, datum_narozeni=datum_narozeni_ed, pocet_clanku=pocet_clanku_ed)
+		db.add(uzivatelCreateRow_pocet_clanku)
+		db.commit()
+		db.refresh(uzivatelCreateRow_pocet_clanku)
+		result = (uzivatelCreateRow_pocet_clanku)
+		return result
 
 	@app.put("/uzivatel", response_model=uzivatelGetSchema)
 	def updateuzivatel(uzivatel: uzivatelUpdateSchema, db: Session=Depends(get_db)):

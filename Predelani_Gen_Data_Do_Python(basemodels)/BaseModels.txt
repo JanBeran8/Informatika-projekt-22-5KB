@@ -41,7 +41,7 @@ class publicuzivatel(BaseModel):
 	uzivatele_id = Column(Integer, Sequence('uzivatel_uzivatele_id_seq'), primary_key=True)
 	jmeno = Column(String(60))
 	prijmeni = Column(String(60))
-	datum_narozeni = Column(Integer)
+	datum_narozeni = Column(DateTime)
 	pocet_clanku = Column(Integer)
 
 

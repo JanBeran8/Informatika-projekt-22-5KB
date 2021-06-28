@@ -1,4 +1,5 @@
 from typing import List, Optional
+from datetime import date, datetime
 from pydantic import BaseModel as BaseSchema       
 
 
@@ -76,14 +77,14 @@ class uzivatelCreateSchema(BaseSchema):
 	uzivatele_id: int
 	jmeno: str
 	prijmeni: str
-	datum_narozeni: int
+	datum_narozeni: date
 	pocet_clanku: int
 
 class uzivatelGetSchema(BaseSchema):
 	uzivatele_id: int
 	jmeno: str
 	prijmeni: str
-	datum_narozeni: int
+	datum_narozeni: date
 	pocet_clanku: int
 	class Config:
 		orm_mode = True
@@ -93,14 +94,14 @@ class uzivatelUpdateSchema(BaseSchema):
 	uzivatele_id: int
 	jmeno: str
 	prijmeni: str
-	datum_narozeni: int
+	datum_narozeni: date
 	pocet_clanku: int
 
 class uzivatelDeleteSchema(BaseSchema):
 	uzivatele_id: int
 	jmeno: str
 	prijmeni: str
-	datum_narozeni: int
+	datum_narozeni: date
 	pocet_clanku: int
 
 
