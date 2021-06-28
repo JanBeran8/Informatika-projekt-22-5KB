@@ -8,16 +8,18 @@ téma č. 2 - Realizujte API generátor pomocí knihovny FastAPI s autentizací 
 ÚKOLY:
 1) Vygenerovat modely (třídy) založené na "base models" POUZE STRUKTURU NE DATA !
 2) Předělat vygenerovanou SQL strukturu na strukturu Python kódu (BaseModels)
-3) Každá třída bude mít endpointy - Create - ✔️
-                                  - Update - ❌
-                                  - Delete - ❌
-                                  - Read_Multiple - ❌
-                                  - Read - ❌
+3) Každá třída bude mít endpointy
+- Create - ✔️
+- Update - ❌ - Nejtezsti DOHLEDAT !
+- Delete - ❌ - Najit jak vypada (odpoved nejaky MSG)
+- Read_Multiple - ✔️ (opravit u UZIVATEL - divná chyba mělo by jet ???)
+- Read - ✔️ (opravit u UZIVATEL - divná chyba mělo by jet ???)
 
 Schemas vygenerovat zvlášť to texťáku - ✔️
 
 -------------------------------------------------------------------------
-
+POŽADAVKY:
+--
 - Výsledný projekt je uložený na public úložišti Github (ihned od začátku). - ✔️
 - WEB Root API či UI je konfigurovatelný (URI). - ❓
 - Klíčové funkcionality jsou popsány a demonstrovány pomocí notebooku v Jupyteru. - ❌
@@ -28,4 +30,5 @@ Schemas vygenerovat zvlášť to texťáku - ✔️
 ------------------------------------------------------------------------    
 DODELAT v programu:
 Podívat se znovu na CRUD operace a tvoření endpointů podle https://fastapi.tiangolo.com/tutorial/sql-databases/
+
 ------------------------------------------------------------------------
