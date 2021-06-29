@@ -78,13 +78,14 @@ def connectAllEndpoints(app):
 		db.refresh(usersToUpdate)
 		return usersToUpdate
 
-	@app.delete("/users", response_model=usersGetSchema)
-	def deleteusers(users: usersDeleteSchema, db: Session=Depends(get_db)):
-		users_to_delete = db.query(publicusers).filter(publicusers == users).first()
+	@app.delete("/users/{id_ed}")
+	def deleteusers(id_ed: int, users: usersDeleteSchema, db: Session=Depends(get_db)):
+		users_to_delete = db.query(publicusers).filter(publicusers.id == id_ed).first()
+		if not users_to_delete:
+			raise HTTPException(status_code=400, detail="users id wasnt found")
 		db.delete(users_to_delete)
-		db.comit()
-		db.refresh(users_to_delete)
-		return users_to_delete
+		db.commit()
+		return {"message": "users id: " + str(id_ed) + " SUCESFULLY DELETED"}
 
 	@app.get("/usergroups/{user_id_ed}", response_model=usergroupsGetSchema)
 	def read_usergroups(user_id_ed: int, db: Session=Depends(get_db)):
@@ -130,13 +131,14 @@ def connectAllEndpoints(app):
 		db.refresh(usergroupsToUpdate)
 		return usergroupsToUpdate
 
-	@app.delete("/usergroups", response_model=usergroupsGetSchema)
-	def deleteusergroups(usergroups: usergroupsDeleteSchema, db: Session=Depends(get_db)):
-		usergroups_to_delete = db.query(publicusergroups).filter(publicusergroups == usergroups).first()
+	@app.delete("/usergroups/{id_ed}")
+	def deleteusergroups(id_ed: int, usergroups: usergroupsDeleteSchema, db: Session=Depends(get_db)):
+		usergroups_to_delete = db.query(publicusergroups).filter(publicusergroups.id == id_ed).first()
+		if not usergroups_to_delete:
+			raise HTTPException(status_code=400, detail="usergroups id wasnt found")
 		db.delete(usergroups_to_delete)
-		db.comit()
-		db.refresh(usergroups_to_delete)
-		return usergroups_to_delete
+		db.commit()
+		return {"message": "usergroups id: " + str(id_ed) + " SUCESFULLY DELETED"}
 
 	@app.get("/groups/{name_ed}", response_model=groupsGetSchema)
 	def read_groups(name_ed: str, db: Session=Depends(get_db)):
@@ -174,13 +176,14 @@ def connectAllEndpoints(app):
 		db.refresh(groupsToUpdate)
 		return groupsToUpdate
 
-	@app.delete("/groups", response_model=groupsGetSchema)
-	def deletegroups(groups: groupsDeleteSchema, db: Session=Depends(get_db)):
-		groups_to_delete = db.query(publicgroups).filter(publicgroups == groups).first()
+	@app.delete("/groups/{id_ed}")
+	def deletegroups(id_ed: int, groups: groupsDeleteSchema, db: Session=Depends(get_db)):
+		groups_to_delete = db.query(publicgroups).filter(publicgroups.id == id_ed).first()
+		if not groups_to_delete:
+			raise HTTPException(status_code=400, detail="groups id wasnt found")
 		db.delete(groups_to_delete)
-		db.comit()
-		db.refresh(groups_to_delete)
-		return groups_to_delete
+		db.commit()
+		return {"message": "groups id: " + str(id_ed) + " SUCESFULLY DELETED"}
 
 	@app.get("/uzivatel/{jmeno_ed}", response_model=uzivatelGetSchema)
 	def read_uzivatel(jmeno_ed: str, db: Session=Depends(get_db)):
@@ -242,13 +245,14 @@ def connectAllEndpoints(app):
 		db.refresh(uzivatelToUpdate)
 		return uzivatelToUpdate
 
-	@app.delete("/uzivatel", response_model=uzivatelGetSchema)
-	def deleteuzivatel(uzivatel: uzivatelDeleteSchema, db: Session=Depends(get_db)):
-		uzivatel_to_delete = db.query(publicuzivatel).filter(publicuzivatel == uzivatel).first()
+	@app.delete("/uzivatel/{uzivatele_id_ed}")
+	def deleteuzivatel(uzivatele_id_ed: int, uzivatel: uzivatelDeleteSchema, db: Session=Depends(get_db)):
+		uzivatel_to_delete = db.query(publicuzivatel).filter(publicuzivatel.uzivatele_id == uzivatele_id_ed).first()
+		if not uzivatel_to_delete:
+			raise HTTPException(status_code=400, detail="uzivatel uzivatele_id wasnt found")
 		db.delete(uzivatel_to_delete)
-		db.comit()
-		db.refresh(uzivatel_to_delete)
-		return uzivatel_to_delete
+		db.commit()
+		return {"message": "uzivatel uzivatele_id: " + str(uzivatele_id_ed) + " SUCESFULLY DELETED"}
 
 
 connectAllEndpoints(app)
