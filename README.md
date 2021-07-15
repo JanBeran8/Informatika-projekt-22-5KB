@@ -10,12 +10,15 @@ téma č. 2 - Realizujte API generátor pomocí knihovny FastAPI s autentizací 
 2) Předělat vygenerovanou SQL strukturu na strukturu Python kódu (BaseModels) ✔️
 3) Každá třída bude mít endpointy
 - Create - ✔️
-- Update - ❌ - Nejtezsi DOHLEDAT !
+- Update - ✔️ - Nejtezsi DOHLEDAT ! ✔️
 - Delete - ✔️ - Najit jak vypada (odpoved nejaky MSG) ✔️
 - Read_Multiple - ✔️ (opravit u UZIVATEL - divná chyba, jede jen když se nepřekročí počet vytvořených uživatelů v limitu✔️ když se chybně zadá do databáze s hodnotou null ,tak nastane chyba u cteni prvku z databaze !! (mozna osetrit?))
 - Read - ✔️ (opravit u UZIVATEL - divná chyba mělo by jet ???) ✔️
 
 Schemas vygenerovat zvlášť to texťáku - ✔️
+
+✔️PROGRAM OTESTOVÁN PRO DATABÁZE **POSTGRES, TESTZHODINY, DUPLICDATA**
+❌DODTESTOVAT A POZMENIT PRO SLOZITOU DATABAZY **DVDRENTAL** !!
 
 -------------------------------------------------------------------------
 POŽADAVKY:
