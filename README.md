@@ -18,6 +18,8 @@ téma č. 2 - Realizujte API generátor pomocí knihovny FastAPI s autentizací 
 Schemas vygenerovat zvlášť to texťáku - ✔️
 
 ✔️PROGRAM OTESTOVÁN PRO DATABÁZE **POSTGRES, TESTZHODINY, DUPLICDATA**
+
+
 ❌DODTESTOVAT A POZMENIT PRO SLOZITOU DATABAZY **DVDRENTAL** !!
 
 -------------------------------------------------------------------------
