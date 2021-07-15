@@ -7,16 +7,19 @@ class usersCreateSchema(BaseSchema):
 	id: int
 	name: str
 
-class usersGetSchema(BaseSchema):
+class usersUpdateSchema(BaseSchema):
 	id: int
 	name: str
 	class Config:
 		orm_mode = True
 	pass
 
-class usersUpdateSchema(BaseSchema):
+class usersGetSchema(BaseSchema):
 	id: int
 	name: str
+	class Config:
+		orm_mode = True
+	pass
 
 class usersDeleteSchema(BaseSchema):
 	id: int
@@ -30,7 +33,7 @@ class usergroupsCreateSchema(BaseSchema):
 	user_id: int
 	group_id: int
 
-class usergroupsGetSchema(BaseSchema):
+class usergroupsUpdateSchema(BaseSchema):
 	id: int
 	user_id: int
 	group_id: int
@@ -38,10 +41,13 @@ class usergroupsGetSchema(BaseSchema):
 		orm_mode = True
 	pass
 
-class usergroupsUpdateSchema(BaseSchema):
+class usergroupsGetSchema(BaseSchema):
 	id: int
 	user_id: int
 	group_id: int
+	class Config:
+		orm_mode = True
+	pass
 
 class usergroupsDeleteSchema(BaseSchema):
 	id: int
@@ -55,16 +61,19 @@ class groupsCreateSchema(BaseSchema):
 	id: int
 	name: str
 
-class groupsGetSchema(BaseSchema):
+class groupsUpdateSchema(BaseSchema):
 	id: int
 	name: str
 	class Config:
 		orm_mode = True
 	pass
 
-class groupsUpdateSchema(BaseSchema):
+class groupsGetSchema(BaseSchema):
 	id: int
 	name: str
+	class Config:
+		orm_mode = True
+	pass
 
 class groupsDeleteSchema(BaseSchema):
 	id: int
@@ -77,31 +86,34 @@ class uzivatelCreateSchema(BaseSchema):
 	uzivatele_id: int
 	jmeno: str
 	prijmeni: str
-	datum_narozeni: date
+	datum_narozeni: int
 	pocet_clanku: int
-
-class uzivatelGetSchema(BaseSchema):
-	uzivatele_id: int
-	jmeno: str
-	prijmeni: str
-	datum_narozeni: date
-	pocet_clanku: int
-	class Config:
-		orm_mode = True
-	pass
 
 class uzivatelUpdateSchema(BaseSchema):
 	uzivatele_id: int
 	jmeno: str
 	prijmeni: str
-	datum_narozeni: date
+	datum_narozeni: int
 	pocet_clanku: int
+	class Config:
+		orm_mode = True
+	pass
+
+class uzivatelGetSchema(BaseSchema):
+	uzivatele_id: int
+	jmeno: str
+	prijmeni: str
+	datum_narozeni: int
+	pocet_clanku: int
+	class Config:
+		orm_mode = True
+	pass
 
 class uzivatelDeleteSchema(BaseSchema):
 	uzivatele_id: int
 	jmeno: str
 	prijmeni: str
-	datum_narozeni: date
+	datum_narozeni: int
 	pocet_clanku: int
 
 

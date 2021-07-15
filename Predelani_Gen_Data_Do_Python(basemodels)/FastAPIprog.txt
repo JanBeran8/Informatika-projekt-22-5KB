@@ -42,9 +42,9 @@ def get_db():
 
 def connectAllEndpoints(app):
 
-	@app.get("/users/{name_ed}", response_model=usersGetSchema)
+	@app.get("/users/{name_ed}", response_model=List[usersGetSchema])
 	def read_users(name_ed: str, db: Session=Depends(get_db)):
-		usersResult_name = db.query(publicusers).filter(publicusers.name == name_ed).first()
+		usersResult_name = db.query(publicusers).filter(publicusers.name == name_ed).all()
 		if (usersResult_name is None):
 			raise HTTPException(status_code=404, detail="Error: This name wasnt found!")
 		else:
@@ -71,11 +71,19 @@ def connectAllEndpoints(app):
 		result = (usersCreateRow_name)
 		return result
 
-	@app.put("/users", response_model=usersGetSchema)
-	def updateusers(users: usersUpdateSchema, db: Session=Depends(get_db)):
-		usersToUpdate = db.query(publicusers).first()
-		db.commit()
-		db.refresh(usersToUpdate)
+	@app.put("/users/{id_ed}/{name_ed}", response_model=usersGetSchema)
+	def updateusers(id_ed: int, name_ed: str, users:usersUpdateSchema,db: Session=Depends(get_db)):
+		usersToUpdate = db.query(publicusers).filter(publicusers.id == id_ed).first()
+		if usersToUpdate is None:
+			raise HTTPException(status_code=400, detail="Error: This id doesnt exist!")
+		if (usersToUpdate.id==id_ed) and (usersToUpdate.name==name_ed):
+			raise HTTPException(status_code=400, detail="Warning: No change done!")
+		else:
+			db.delete(usersToUpdate)
+			usersToUpdate = publicusers(id=id_ed, name=name_ed)
+			db.add(usersToUpdate)
+			db.commit()
+			db.refresh(usersToUpdate)
 		return usersToUpdate
 
 	@app.delete("/users/{id_ed}")
@@ -87,17 +95,17 @@ def connectAllEndpoints(app):
 		db.commit()
 		return {"message": "users id: " + str(id_ed) + " SUCESFULLY DELETED"}
 
-	@app.get("/usergroups/{user_id_ed}", response_model=usergroupsGetSchema)
+	@app.get("/usergroups/{user_id_ed}", response_model=List[usergroupsGetSchema])
 	def read_usergroups(user_id_ed: int, db: Session=Depends(get_db)):
-		usergroupsResult_user_id = db.query(publicusergroups).filter(publicusergroups.user_id == user_id_ed).first()
+		usergroupsResult_user_id = db.query(publicusergroups).filter(publicusergroups.user_id == user_id_ed).all()
 		if (usergroupsResult_user_id is None):
 			raise HTTPException(status_code=404, detail="Error: This user_id wasnt found!")
 		else:
 			return usergroupsResult_user_id
 
-	@app.get("/usergroups/{group_id_ed}", response_model=usergroupsGetSchema)
+	@app.get("/usergroups/{group_id_ed}", response_model=List[usergroupsGetSchema])
 	def read_usergroups(group_id_ed: int, db: Session=Depends(get_db)):
-		usergroupsResult_group_id = db.query(publicusergroups).filter(publicusergroups.group_id == group_id_ed).first()
+		usergroupsResult_group_id = db.query(publicusergroups).filter(publicusergroups.group_id == group_id_ed).all()
 		if (usergroupsResult_group_id is None):
 			raise HTTPException(status_code=404, detail="Error: This group_id wasnt found!")
 		else:
@@ -124,11 +132,19 @@ def connectAllEndpoints(app):
 		result = (usergroupsCreateRow_group_id)
 		return result
 
-	@app.put("/usergroups", response_model=usergroupsGetSchema)
-	def updateusergroups(usergroups: usergroupsUpdateSchema, db: Session=Depends(get_db)):
-		usergroupsToUpdate = db.query(publicusergroups).first()
-		db.commit()
-		db.refresh(usergroupsToUpdate)
+	@app.put("/usergroups/{id_ed}/{user_id_ed}/{group_id_ed}", response_model=usergroupsGetSchema)
+	def updateusergroups(id_ed: int, user_id_ed: int, group_id_ed: int, usergroups:usergroupsUpdateSchema,db: Session=Depends(get_db)):
+		usergroupsToUpdate = db.query(publicusergroups).filter(publicusergroups.id == id_ed).first()
+		if usergroupsToUpdate is None:
+			raise HTTPException(status_code=400, detail="Error: This id doesnt exist!")
+		if (usergroupsToUpdate.id==id_ed) and (usergroupsToUpdate.user_id==user_id_ed) and (usergroupsToUpdate.group_id==group_id_ed):
+			raise HTTPException(status_code=400, detail="Warning: No change done!")
+		else:
+			db.delete(usergroupsToUpdate)
+			usergroupsToUpdate = publicusergroups(id=id_ed, user_id=user_id_ed, group_id=group_id_ed)
+			db.add(usergroupsToUpdate)
+			db.commit()
+			db.refresh(usergroupsToUpdate)
 		return usergroupsToUpdate
 
 	@app.delete("/usergroups/{id_ed}")
@@ -140,9 +156,9 @@ def connectAllEndpoints(app):
 		db.commit()
 		return {"message": "usergroups id: " + str(id_ed) + " SUCESFULLY DELETED"}
 
-	@app.get("/groups/{name_ed}", response_model=groupsGetSchema)
+	@app.get("/groups/{name_ed}", response_model=List[groupsGetSchema])
 	def read_groups(name_ed: str, db: Session=Depends(get_db)):
-		groupsResult_name = db.query(publicgroups).filter(publicgroups.name == name_ed).first()
+		groupsResult_name = db.query(publicgroups).filter(publicgroups.name == name_ed).all()
 		if (groupsResult_name is None):
 			raise HTTPException(status_code=404, detail="Error: This name wasnt found!")
 		else:
@@ -169,11 +185,19 @@ def connectAllEndpoints(app):
 		result = (groupsCreateRow_name)
 		return result
 
-	@app.put("/groups", response_model=groupsGetSchema)
-	def updategroups(groups: groupsUpdateSchema, db: Session=Depends(get_db)):
-		groupsToUpdate = db.query(publicgroups).first()
-		db.commit()
-		db.refresh(groupsToUpdate)
+	@app.put("/groups/{id_ed}/{name_ed}", response_model=groupsGetSchema)
+	def updategroups(id_ed: int, name_ed: str, groups:groupsUpdateSchema,db: Session=Depends(get_db)):
+		groupsToUpdate = db.query(publicgroups).filter(publicgroups.id == id_ed).first()
+		if groupsToUpdate is None:
+			raise HTTPException(status_code=400, detail="Error: This id doesnt exist!")
+		if (groupsToUpdate.id==id_ed) and (groupsToUpdate.name==name_ed):
+			raise HTTPException(status_code=400, detail="Warning: No change done!")
+		else:
+			db.delete(groupsToUpdate)
+			groupsToUpdate = publicgroups(id=id_ed, name=name_ed)
+			db.add(groupsToUpdate)
+			db.commit()
+			db.refresh(groupsToUpdate)
 		return groupsToUpdate
 
 	@app.delete("/groups/{id_ed}")
@@ -185,33 +209,33 @@ def connectAllEndpoints(app):
 		db.commit()
 		return {"message": "groups id: " + str(id_ed) + " SUCESFULLY DELETED"}
 
-	@app.get("/uzivatel/{jmeno_ed}", response_model=uzivatelGetSchema)
+	@app.get("/uzivatel/{jmeno_ed}", response_model=List[uzivatelGetSchema])
 	def read_uzivatel(jmeno_ed: str, db: Session=Depends(get_db)):
-		uzivatelResult_jmeno = db.query(publicuzivatel).filter(publicuzivatel.jmeno == jmeno_ed).first()
+		uzivatelResult_jmeno = db.query(publicuzivatel).filter(publicuzivatel.jmeno == jmeno_ed).all()
 		if (uzivatelResult_jmeno is None):
 			raise HTTPException(status_code=404, detail="Error: This jmeno wasnt found!")
 		else:
 			return uzivatelResult_jmeno
 
-	@app.get("/uzivatel/{prijmeni_ed}", response_model=uzivatelGetSchema)
+	@app.get("/uzivatel/{prijmeni_ed}", response_model=List[uzivatelGetSchema])
 	def read_uzivatel(prijmeni_ed: str, db: Session=Depends(get_db)):
-		uzivatelResult_prijmeni = db.query(publicuzivatel).filter(publicuzivatel.prijmeni == prijmeni_ed).first()
+		uzivatelResult_prijmeni = db.query(publicuzivatel).filter(publicuzivatel.prijmeni == prijmeni_ed).all()
 		if (uzivatelResult_prijmeni is None):
 			raise HTTPException(status_code=404, detail="Error: This prijmeni wasnt found!")
 		else:
 			return uzivatelResult_prijmeni
 
-	@app.get("/uzivatel/{datum_narozeni_ed}", response_model=uzivatelGetSchema)
-	def read_uzivatel(datum_narozeni_ed: date, db: Session=Depends(get_db)):
-		uzivatelResult_datum_narozeni = db.query(publicuzivatel).filter(publicuzivatel.datum_narozeni == datum_narozeni_ed).first()
+	@app.get("/uzivatel/{datum_narozeni_ed}", response_model=List[uzivatelGetSchema])
+	def read_uzivatel(datum_narozeni_ed: int, db: Session=Depends(get_db)):
+		uzivatelResult_datum_narozeni = db.query(publicuzivatel).filter(publicuzivatel.datum_narozeni == datum_narozeni_ed).all()
 		if (uzivatelResult_datum_narozeni is None):
 			raise HTTPException(status_code=404, detail="Error: This datum_narozeni wasnt found!")
 		else:
 			return uzivatelResult_datum_narozeni
 
-	@app.get("/uzivatel/{pocet_clanku_ed}", response_model=uzivatelGetSchema)
+	@app.get("/uzivatel/{pocet_clanku_ed}", response_model=List[uzivatelGetSchema])
 	def read_uzivatel(pocet_clanku_ed: int, db: Session=Depends(get_db)):
-		uzivatelResult_pocet_clanku = db.query(publicuzivatel).filter(publicuzivatel.pocet_clanku == pocet_clanku_ed).first()
+		uzivatelResult_pocet_clanku = db.query(publicuzivatel).filter(publicuzivatel.pocet_clanku == pocet_clanku_ed).all()
 		if (uzivatelResult_pocet_clanku is None):
 			raise HTTPException(status_code=404, detail="Error: This pocet_clanku wasnt found!")
 		else:
@@ -223,7 +247,7 @@ def connectAllEndpoints(app):
 		return uzivatelResult
 
 	@app.post("/uzivatel/{uzivatele_id_ed}/{jmeno_ed}/{prijmeni_ed}/{datum_narozeni_ed}/{pocet_clanku_ed}", response_model=uzivatelGetSchema)
-	def createuzivatel(uzivatele_id_ed: int, jmeno_ed: str, prijmeni_ed: str, datum_narozeni_ed: date, pocet_clanku_ed: int, uzivatel:uzivatelCreateSchema,db: Session=Depends(get_db)):
+	def createuzivatel(uzivatele_id_ed: int, jmeno_ed: str, prijmeni_ed: str, datum_narozeni_ed: int, pocet_clanku_ed: int, uzivatel:uzivatelCreateSchema,db: Session=Depends(get_db)):
 		uzivatelRow_uzivatele_id = db.query(publicuzivatel).filter(publicuzivatel.uzivatele_id == uzivatele_id_ed).first()
 		if uzivatelRow_uzivatele_id:
 			raise HTTPException(status_code=400, detail="Error: This uzivatele_id already exist!")
@@ -238,11 +262,19 @@ def connectAllEndpoints(app):
 		result = (uzivatelCreateRow_pocet_clanku)
 		return result
 
-	@app.put("/uzivatel", response_model=uzivatelGetSchema)
-	def updateuzivatel(uzivatel: uzivatelUpdateSchema, db: Session=Depends(get_db)):
-		uzivatelToUpdate = db.query(publicuzivatel).first()
-		db.commit()
-		db.refresh(uzivatelToUpdate)
+	@app.put("/uzivatel/{uzivatele_id_ed}/{jmeno_ed}/{prijmeni_ed}/{datum_narozeni_ed}/{pocet_clanku_ed}", response_model=uzivatelGetSchema)
+	def updateuzivatel(uzivatele_id_ed: int, jmeno_ed: str, prijmeni_ed: str, datum_narozeni_ed: int, pocet_clanku_ed: int, uzivatel:uzivatelUpdateSchema,db: Session=Depends(get_db)):
+		uzivatelToUpdate = db.query(publicuzivatel).filter(publicuzivatel.uzivatele_id == uzivatele_id_ed).first()
+		if uzivatelToUpdate is None:
+			raise HTTPException(status_code=400, detail="Error: This uzivatele_id doesnt exist!")
+		if (uzivatelToUpdate.uzivatele_id==uzivatele_id_ed) and (uzivatelToUpdate.jmeno==jmeno_ed) and (uzivatelToUpdate.prijmeni==prijmeni_ed) and (uzivatelToUpdate.datum_narozeni==datum_narozeni_ed) and (uzivatelToUpdate.pocet_clanku==pocet_clanku_ed):
+			raise HTTPException(status_code=400, detail="Warning: No change done!")
+		else:
+			db.delete(uzivatelToUpdate)
+			uzivatelToUpdate = publicuzivatel(uzivatele_id=uzivatele_id_ed, jmeno=jmeno_ed, prijmeni=prijmeni_ed, datum_narozeni=datum_narozeni_ed, pocet_clanku=pocet_clanku_ed)
+			db.add(uzivatelToUpdate)
+			db.commit()
+			db.refresh(uzivatelToUpdate)
 		return uzivatelToUpdate
 
 	@app.delete("/uzivatel/{uzivatele_id_ed}")
