@@ -20,20 +20,35 @@ Schemas vygenerovat zvlášť to texťáku - ✔️
 ✔️PROGRAM OTESTOVÁN PRO DATABÁZE **POSTGRES, TESTZHODINY, DUPLICDATA**
 
 
-❌DODTESTOVAT A POZMENIT PRO SLOZITOU DATABAZY **DVDRENTAL** !!
+✔️DODTESTOVAT A POZMENIT PRO SLOZITOU DATABAZY **DVDRENTAL** !! 
+
+U každé databáze uživatel musí provést drobn změny k funkčnosti podle představ, jedná se o obecné řešení, které je funkční na všech databázích.
 
 -------------------------------------------------------------------------
 POŽADAVKY:
 --
 - Výsledný projekt je uložený na public úložišti Github (ihned od začátku). - ✔️
 - WEB Root API či UI je konfigurovatelný (URI). - ❓
-- Klíčové funkcionality jsou popsány a demonstrovány pomocí notebooku v Jupyteru. - ❌
-- Je definovaný dockerfile / compose.yml pro spuštění výsledného projektu v prostředí docker. - ❌
-- Docker images jsou publikovány na hub.docker.com - ❌
+- Klíčové funkcionality jsou popsány a demonstrovány pomocí notebooku v Jupyteru. - ✔️
+- Je definovaný dockerfile / compose.yml pro spuštění výsledného projektu v prostředí docker. - ✔️
+- Docker images jsou publikovány na hub.docker.com - ✔️
 - Je nastavena otevřená licence (MIT). - ✔️
 
 ------------------------------------------------------------------------    
-DODELAT v programu:
+✔️DODELAT v programu:
 Podívat se znovu na CRUD operace a tvoření endpointů podle https://fastapi.tiangolo.com/tutorial/sql-databases/
 
 ------------------------------------------------------------------------
+❌Dodelat u init.sql ===> implementovat do postgresu vzorovou databazi pomoci docker-compose (neni požadována??)
+
+Prezentace:
+
+✔️Demonstrovat funkčnost na databázích v docker "jupyter_datas"
+
+❌Demonstrovat funkčnost docker-compose (+ Dockerfile + init.sql), ktery vytvori docker "apigen"
+
+❌Vytvořit DOKUMENTACI vhodnou k prezentování funkčnosti
+
+❌Vytvořit návod k obsluze ?
+
+❌Připravit prezentaci  funkčnosti s vysvětlením endpointů u FastAPI
