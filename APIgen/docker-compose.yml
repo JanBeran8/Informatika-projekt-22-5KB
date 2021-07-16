@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=example
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=anoyne@anywhere.com
+      - PGADMIN_DEFAULT_PASSWORD=example
+    ports:
+      - 50011:80
+    depends_on:
+      - postgres
+
+  jupyter:
+    build:
+      context: ./APIgen
+    ports:
+      - 8888:8888
+      - 8800:9992
+    volumes:
+      - ${CD}/notebooks:/home/jovyan/work
