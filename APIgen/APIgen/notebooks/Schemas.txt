@@ -86,14 +86,14 @@ class uzivatelCreateSchema(BaseSchema):
 	uzivatele_id: int
 	jmeno: str
 	prijmeni: str
-	datum_narozeni: int
+	datum_narozeni: date
 	pocet_clanku: int
 
 class uzivatelUpdateSchema(BaseSchema):
 	uzivatele_id: int
 	jmeno: str
 	prijmeni: str
-	datum_narozeni: int
+	datum_narozeni: date
 	pocet_clanku: int
 	class Config:
 		orm_mode = True
@@ -103,7 +103,7 @@ class uzivatelGetSchema(BaseSchema):
 	uzivatele_id: int
 	jmeno: str
 	prijmeni: str
-	datum_narozeni: int
+	datum_narozeni: date
 	pocet_clanku: int
 	class Config:
 		orm_mode = True
@@ -113,7 +113,7 @@ class uzivatelDeleteSchema(BaseSchema):
 	uzivatele_id: int
 	jmeno: str
 	prijmeni: str
-	datum_narozeni: int
+	datum_narozeni: date
 	pocet_clanku: int
 
 

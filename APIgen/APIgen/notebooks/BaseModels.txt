@@ -38,10 +38,10 @@ class publicgroups(BaseModel):
 class publicuzivatel(BaseModel):
 	__tablename__ = 'uzivatel' 
 
-	uzivatele_id = Column(Integer, primary_key=True)
+	uzivatele_id = Column(Integer, Sequence('uzivatel_uzivatele_id_seq'), primary_key=True)
 	jmeno = Column(String(60))
 	prijmeni = Column(String(60))
-	datum_narozeni = Column(Integer)
+	datum_narozeni = Column(DateTime)
 	pocet_clanku = Column(Integer)
 
 
