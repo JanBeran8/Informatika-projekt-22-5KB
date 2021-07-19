@@ -39,16 +39,16 @@ POŽADAVKY:
 Podívat se znovu na CRUD operace a tvoření endpointů podle https://fastapi.tiangolo.com/tutorial/sql-databases/
 
 ------------------------------------------------------------------------
-❌Dodelat u init.sql ===> implementovat do postgresu vzorovou databazi pomoci docker-compose (neni požadována??)
+❓Dodelat u init.sql ===> implementovat do postgresu vzorovou databazi pomoci docker-compose (neni požadována??)
 
 Prezentace:
 
 ✔️Demonstrovat funkčnost na databázích v docker "jupyter_datas"
 
-❌Demonstrovat funkčnost docker-compose (+ Dockerfile + init.sql), ktery vytvori docker "apigen"
+✔️Demonstrovat funkčnost docker-compose (+ Dockerfile + init.sql), ktery vytvori docker "apigen"
 
-❌Vytvořit DOKUMENTACI vhodnou k prezentování funkčnosti
+✔️Vytvořit DOKUMENTACI vhodnou k prezentování funkčnosti
 
-❌Vytvořit návod k obsluze ?
+✔️Vytvořit návod k obsluze ?
 
 ❌Připravit prezentaci  funkčnosti s vysvětlením endpointů u FastAPI
