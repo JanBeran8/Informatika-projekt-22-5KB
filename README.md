@@ -20,7 +20,7 @@ Schemas vygenerovat zvlášť to texťáku - ✔️
 ✔️PROGRAM OTESTOVÁN PRO DATABÁZE **POSTGRES, TESTZHODINY, DUPLICDATA**
 
 
-✔️DODTESTOVAT A POZMENIT PRO SLOZITOU DATABAZY **DVDRENTAL** !! 
+✔️DODTESTOVAT A POZMENIT PRO SLOZITOU DATABAZI **DVDRENTAL** !! 
 
 U každé databáze uživatel musí provést drobn změny k funkčnosti podle představ, jedná se o obecné řešení, které je funkční na všech databázích.
 
