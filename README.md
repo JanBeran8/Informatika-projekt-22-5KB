@@ -51,4 +51,7 @@ Prezentace:
 
 ✔️Vytvořit návod k obsluze ?
 
-❌Připravit prezentaci  funkčnosti s vysvětlením endpointů u FastAPI
+✔️Připravit prezentaci  funkčnosti s vysvětlením endpointů u FastAPI
+
+✔️**Připraveno k obhajobě**✔️
+
